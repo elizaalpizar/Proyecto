@@ -21,7 +21,7 @@ h3{
     color: rgb(230, 118, 20);
 }
 #row {
-    background-color: aqua;
+    background-color: rgb(221, 229, 63);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: #f5a;
     text-align: center;
@@ -43,7 +43,7 @@ h3{
     width: auto;
     padding: 10px;
     border-radius: 10px;
-    color: rgb(158, 23, 23);
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-
+    color: rgb(34, 43, 210);
+    box-shadow: 0 0 10px rgba(252, 0, 0, 0.3);
+    margin: 20px;
 }
