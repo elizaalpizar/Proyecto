@@ -10,13 +10,6 @@ body {
     margin: 0;
     background-color: #3C9;
 }
-
-.h1 {
-    text-align: center;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    color: aqua;
-}
-
 .h3 {
     text-align: center;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -29,13 +22,6 @@ h1 {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color: rgb(230, 118, 20);
 }
-
-h3 {
-    text-align: center;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    color: rgb(230, 118, 20);
-}
-
 #row {
     background-color: rgb(221, 229, 63);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
