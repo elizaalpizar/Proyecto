@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Energym Costa Rica - Inicio</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+
+  <!-- Estilo -->
+  <style>
+    :root {
+      --color-primario: #00bcd4;     /* Turquesa */
+      --color-secundario: #80deea;   /* Celeste claro */
+      --color-fondo: #f0f9fa;
+      --color-texto: #1a1a1a;
+      --fuente: 'Montserrat', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--fuente);
+      background-color: var(--color-fondo);
+      color: var(--color-texto);
+      line-height: 1.6;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background-color: var(--color-primario);
+      padding: 25px 40px;
+      color: white;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .navbar h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    .navbar ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    .navbar ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 10px 15px;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+
+    .navbar ul li a:hover {
+      background-color: var(--color-secundario);
+      color: #000;
+    }
+
+    /* ===== SLIDER ===== */
+    .slider img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      margin-bottom: 30px;
+    }
+
+    section {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: var(--color-primario);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .info-general, .testimonios {
+      text-align: center;
+    }
+
+    .info-general p {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .testimonial {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 700px;
+    }
+
+    /* ===== REDES SOCIALES ===== */
+    .redes-sociales {
+      background-color: white;
+      text-align: center;
+      padding: 50px 20px;
+      margin-top: 50px;
+    }
+
+    .redes-sociales-icons {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 25px;
+    }
+
+    .redes-sociales a {
+      font-size: 2.5rem;
+      color: #333;
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    .redes-sociales a:hover {
+      transform: scale(1.3);
+    }
+
+    /* Colores específicos para cada red social */
+    .redes-sociales a.facebook:hover {
+      color: #1877f2; /* Azul Facebook */
+    }
+
+    .redes-sociales a.instagram:hover {
+      color: #c13584; /* Morado Instagram */
+    }
+
+    .redes-sociales a.tiktok:hover {
+      color: #ff0050; /* Rojo TikTok */
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background-color: var(--color-primario);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ENCABEZADO -->
+  <header>
+  <nav class="navbar">
+    <h1>Energym</h1>
+    <ul>
+      <li><a href="PagAcercaDe.html">Acerca de</a></li>
+      <li><a href="Contactenos.html">Contáctenos</a></li>
+      <li><a href="InicioSesion.html">Iniciar Sesión</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+  <!-- SLIDER -->
+  <!-- ZONAS DE ENTRENAMIENTO -->
+<section class="zonas">
+  <h2>Zonas de Entrenamiento</h2>
+  <div class="zona-botones">
+    <button onclick="mostrarZona('mancuernas')">Zona de Mancuernas</button>
+    <button onclick="mostrarZona('cardio')">Zona de Cardio</button>
+    <button onclick="mostrarZona('funcional')">Zona Funcional</button>
+  </div>
+
+  <div class="zona-imagen" id="imagenZona">
+    <p>Haz clic en una zona para ver la imagen</p>
+  </div>
+</section>
+
+<!-- ESTILOS PARA LA NUEVA SECCIÓN (puedes añadir esto dentro del <style>) -->
+<style>
+  .zonas {
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .zona-botones {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+  }
+
+  .zona-botones button {
+    background-color: var(--color-primario);
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .zona-botones button:hover {
+    background-color: var(--color-secundario);
+    color: #000;
+    transform: scale(1.05);
+  }
+
+  .zona-imagen img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+
+  .zona-imagen p {
+    font-size: 1.1rem;
+    color: #555;
+  }
+</style>
+
+<!-- SCRIPT PARA MOSTRAR LA IMAGEN SEGÚN BOTÓN -->
+<script>
+  function mostrarZona(zona) {
+    const contenedor = document.getElementById('imagenZona');
+    let imagen = '';
+    let alt = '';
+
+    if (zona === 'mancuernas') {
+      imagen = 'https://www.fitfigueres.com/FitxersWeb/155232/foto-1-musculacio%CC%81.jpg';
+      alt = 'Zona de mancuernas';
+    } else if (zona === 'cardio') {
+      imagen = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-UNq7lnvXHy0GnkV6Wt5lcO3OZrFn-cl4rA&s';
+      alt = 'Zona de cardio';
+    } else if (zona === 'funcional') {
+      imagen = 'https://youcanfit.es/wp-content/uploads/2021/06/galeria-instalaciones8.jpg';
+      alt = 'Zona funcional';
+    }
+
+    contenedor.innerHTML = `<img src="${imagen}" alt="${alt}"><p>${alt}</p>`;
+  }
+</script>
+
+
+  <!-- INFORMACIÓN GENERAL -->
+  <section class="info-general">
+    <h2>Bienvenido a Energym</h2>
+    <p>
+      Ofrecemos las mejores zonas de entrenamiento en Costa Rica con instructores certificados y espacios modernos,
+      ideales para tu rendimiento deportivo.
+    </p>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section class="testimonios">
+    <h2>Lo que opinan nuestros atletas</h2>
+    <div class="testimonial">
+      <p>“Entrenar en Energym ha sido mi mejor decisión. Todo impecable y profesional.” – @Laura_SQ.</p>
+    </div>
+    <div class="testimonial">
+      <p>“Puedo reservar con anticipación y siempre tengo mi espacio listo.” – @DiegVaz981.</p>
+    </div>
+  </section>
+
+  <!-- REDES SOCIALES -->
+  <section class="redes-sociales">
+    <h2>Síguenos en redes sociales</h2>
+    <div class="redes-sociales-icons">
+      <a href="https://www.facebook.com/energymcr" target="_blank" aria-label="Facebook Energym" class="facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://www.instagram.com/energym_cr" target="_blank" aria-label="Instagram Energym" class="instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.tiktok.com/@energymcr" target="_blank" aria-label="TikTok Energym" class="tiktok">
+        <i class="fab fa-tiktok"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- PIE DE PÁGINA -->
+  <footer>
+    <p>&copy; 2025 Energym Costa Rica. Todos los derechos reservados.</p>
+  </footer>
+
+</body>
+</html>
