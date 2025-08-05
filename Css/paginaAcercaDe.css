@@ -2,24 +2,24 @@ body {
     font-family: sans-serif;
     font-weight: normal;
     font-size: 100%;
-    color: rgb(0, 0, 0);
     margin: 0;
-    background-color: rgb(47, 242, 239);
+    background-color: aqua;
 }
 
 h1 {
     text-align: center;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    color: rgb(27, 45, 239);
+    color: rgb(78, 89, 202);
 }
 
 h2 {
     text-align: center;
     font-size: 2rem;
-    color: #f84949;
+    color: rgb(78, 89, 202);
 }
-#contenedor {
-    background-color: rgba(33, 169, 62, 0.569);
+
+.contenedor {
+    background-color: rgb(25, 166, 166);
     text-align: center;
     margin: 2%;
     padding: 2%;
@@ -27,6 +27,9 @@ h2 {
     margin-left: auto;
     margin-right: auto; */
     border-radius: 10px;
+}
+.contenedor p{
+    font-size:110%;
 }
 
 .col-mid-contenedor {
@@ -42,49 +45,59 @@ h2 {
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    color: rgb(34, 43, 210);
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    box-shadow: 0 0 10px rgba(252, 0, 0, 0.3);
+    color: rgb(78, 89, 202);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
 }
+
 .col-mid ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .col-mid ul li {
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 }
+
 header {
-      background-color:aqua;
-      padding: 25px 40px;
-      color: rgb(255, 6, 6);
-    }
+    background-color: aqua;
+    padding: 25px 40px;
+    color: rgb(78, 89, 202);
+}
 
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: auto;
-    }
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width:auto;
+    margin: auto;
+}
 
-    .navbar h1 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: white;
-    }
+.navbar h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: rgb(78, 89, 202);
+}
 
-    .navbar ul {
-      display: flex;
-      list-style: none;
-      gap: 25px;
-    }
+.navbar ul {
+    display: flex;
+    list-style: none;
+    gap: 65px;
+    font-size: 3ch;
+}
 
-    .navbar ul li a {
-      color: rgb(248, 35, 35);
-      text-decoration: none;
-      font-weight: 600;
-      padding: 10px 15px;
-      border-radius: 6px;
+.navbar ul li a {
+    color: rgb(78, 89, 202);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 6px;
+}
+footer {
+      background-color: aqua;
+      color: rgb(0, 0, 0);
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
     }
