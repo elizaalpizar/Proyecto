@@ -55,3 +55,37 @@ h2 {
 .col-mid ul li {
   margin-bottom: 5px;
 }
+header {
+      background-color:aqua;
+      padding: 25px 40px;
+      color: rgb(255, 6, 6);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .navbar h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    .navbar ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    .navbar ul li a {
+      color: rgb(248, 35, 35);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 10px 15px;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }

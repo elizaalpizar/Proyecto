@@ -1,101 +1,102 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <!-- ENCABEZADO -->
   <header>
-  <nav class="navbar">
-    <h1>Energym</h1>
-    <ul>
-      <li><a href="PagAcercaDe.html" target="_blank">Acerca de</a></li>
-      <li><a href="Contactenos.html" target="_blank">Contáctenos</a></li>
-      <li><a href="InicioSesion.html" target="_blank">Iniciar Sesión</a></li>
-    </ul>
-  </nav>
-</header>
+    <nav class="navbar">
+      <h1>Energym</h1>
+      <ul>
+        <li><a href="PagAcercaDe.html" target="_blank">Acerca de</a></li>
+        <li><a href="Contactenos.html" target="_blank">Contáctenos</a></li>
+        <li><a href="InicioSesion.html" target="_blank">Iniciar Sesión</a></li>
+      </ul>
+    </nav>
+  </header>
 
 
   <!-- SLIDER -->
   <!-- ZONAS DE ENTRENAMIENTO -->
-<section class="zonas">
-  <h2>Zonas de Entrenamiento</h2>
-  <div class="zona-botones">
-    <button onclick="mostrarZona('mancuernas')">Zona de Mancuernas</button>
-    <button onclick="mostrarZona('cardio')">Zona de Cardio</button>
-    <button onclick="mostrarZona('funcional')">Zona Funcional</button>
-  </div>
+  <section class="zonas">
+    <h2>Zonas de Entrenamiento</h2>
+    <div class="zona-botones">
+      <button onclick="mostrarZona('mancuernas')">Zona de Mancuernas</button>
+      <button onclick="mostrarZona('cardio')">Zona de Cardio</button>
+      <button onclick="mostrarZona('funcional')">Zona Funcional</button>
+    </div>
 
-  <div class="zona-imagen" id="imagenZona">
-    <p>Haz clic en una zona para ver la imagen</p>
-  </div>
-</section>
+    <div class="zona-imagen" id="imagenZona">
+      <p>Haz clic en una zona para ver la imagen</p>
+    </div>
+  </section>
 
-<!-- ESTILOS PARA LA NUEVA SECCIÓN (puedes añadir esto dentro del <style>) -->
-<style>
-  .zonas {
-    text-align: center;
-    padding: 40px 20px;
-  }
-
-  .zona-botones {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
-  }
-
-  .zona-botones button {
-    background-color: var(--color-primario);
-    color: white;
-    border: none;
-    padding: 15px 25px;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
-  }
-
-  .zona-botones button:hover {
-    background-color: var(--color-secundario);
-    color: #000;
-    transform: scale(1.05);
-  }
-
-  .zona-imagen img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  }
-
-  .zona-imagen p {
-    font-size: 1.1rem;
-    color: #555;
-  }
-</style>
-
-<!-- SCRIPT PARA MOSTRAR LA IMAGEN SEGÚN BOTÓN -->
-<script>
-  function mostrarZona(zona) {
-    const contenedor = document.getElementById('imagenZona');
-    let imagen = '';
-    let alt = '';
-
-    if (zona === 'mancuernas') {
-      imagen = 'https://www.fitfigueres.com/FitxersWeb/155232/foto-1-musculacio%CC%81.jpg';
-      alt = 'Zona de mancuernas';
-    } else if (zona === 'cardio') {
-      imagen = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-UNq7lnvXHy0GnkV6Wt5lcO3OZrFn-cl4rA&s';
-      alt = 'Zona de cardio';
-    } else if (zona === 'funcional') {
-      imagen = 'https://youcanfit.es/wp-content/uploads/2021/06/galeria-instalaciones8.jpg';
-      alt = 'Zona funcional';
+  <!-- ESTILOS PARA LA NUEVA SECCIÓN (puedes añadir esto dentro del <style>) -->
+  <style>
+    .zonas {
+      text-align: center;
+      padding: 40px 20px;
     }
 
-    contenedor.innerHTML = `<img src="${imagen}" alt="${alt}"><p>${alt}</p>`;
-  }
-</script>
+    .zona-botones {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .zona-botones button {
+      background-color: var(--color-primario);
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .zona-botones button:hover {
+      background-color: var(--color-secundario);
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    .zona-imagen img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .zona-imagen p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+  </style>
+
+  <!-- SCRIPT PARA MOSTRAR LA IMAGEN SEGÚN BOTÓN -->
+  <script>
+    function mostrarZona(zona) {
+      const contenedor = document.getElementById('imagenZona');
+      let imagen = '';
+      let alt = '';
+
+      if (zona === 'mancuernas') {
+        imagen = 'https://www.fitfigueres.com/FitxersWeb/155232/foto-1-musculacio%CC%81.jpg';
+        alt = 'Zona de mancuernas';
+      } else if (zona === 'cardio') {
+        imagen = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-UNq7lnvXHy0GnkV6Wt5lcO3OZrFn-cl4rA&s';
+        alt = 'Zona de cardio';
+      } else if (zona === 'funcional') {
+        imagen = 'https://youcanfit.es/wp-content/uploads/2021/06/galeria-instalaciones8.jpg';
+        alt = 'Zona funcional';
+      }
+
+      contenedor.innerHTML = `<img src="${imagen}" alt="${alt}"><p>${alt}</p>`;
+    }
+  </script>
 
 
   <!-- INFORMACIÓN GENERAL -->
@@ -139,5 +140,6 @@
     <p>&copy; 2025 Energym Costa Rica. Todos los derechos reservados.</p>
   </footer>
 
-</body>
+  </body>
+
 </html>
