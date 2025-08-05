@@ -32,13 +32,14 @@ h1 {
     align-items: center;
     background-color: rgba(15, 161, 201, 0.857);
     margin: 2%;
-    padding: 2%;
+    padding: 5%;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
 }
 
 #col-mid {
+    /*margin-top: 60%;*/
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center;
     align-items: center;
