@@ -172,9 +172,9 @@
   <nav class="navbar">
     <h1>Energym</h1>
     <ul>
-      <li><a href="PagAcercaDe.html">Acerca de</a></li>
-      <li><a href="Contactenos.html">Contáctenos</a></li>
-      <li><a href="InicioSesion.html">Iniciar Sesión</a></li>
+      <li><a href="PagAcercaDe.html" target="_blank">Acerca de</a></li>
+      <li><a href="Contactenos.html" target="_blank">Contáctenos</a></li>
+      <li><a href="InicioSesion.html" target="_blank">Iniciar Sesión</a></li>
     </ul>
   </nav>
 </header>
