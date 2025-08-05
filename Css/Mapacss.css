@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ubicación - Energym Costa Rica</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome (por si lo usas en otras secciones) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+
+  <style>
+    :root {
+      --color-primario: #00bcd4;
+      --color-secundario: #80deea;
+      --color-fondo: #f0f9fa;
+      --color-texto: #1a1a1a;
+      --fuente: 'Montserrat', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--fuente);
+      background-color: var(--color-fondo);
+      color: var(--color-texto);
+      line-height: 1.6;
+    }
+
+    /* HEADER */
+    header {
+      background-color: var(--color-primario);
+      padding: 20px 40px;
+      color: white;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .navbar h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    .navbar ul {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .navbar ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .navbar ul li a:hover,
+    .navbar ul li a[aria-current="page"] {
+      background-color: var(--color-secundario);
+      color: #000;
+    }
+
+    /* CONTENIDO */
+    .contenedor-mapa {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .contenedor-mapa h2 {
+      font-size: 2.2rem;
+      color: var(--color-primario);
+      margin-bottom: 15px;
+    }
+
+    .contenedor-mapa p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      color: #444;
+    }
+
+    .contenedor-mapa iframe {
+      width: 100%;
+      height: 450px;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* FOOTER */
+    footer {
+      background-color: var(--color-primario);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+      font-size: 0.95rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .navbar ul {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .contenedor-mapa iframe {
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
