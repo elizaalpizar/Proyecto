@@ -18,15 +18,16 @@ h1 {
     font-size: 2rem;
     margin-top: 60px;
     margin: 60px 0 30px;
-    color: #000;
+    color: #de2020;
 }
 #contenedor {
     background-color: rgba(33, 169, 62, 0.569);
+    text-align: center;
     margin: 2%;
     padding: 2%;
-    max-width: 1200px;
+    /* max-width: 1200px;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; */
     border-radius: 10px;
 }
 
@@ -38,12 +39,13 @@ h1 {
 }
 
 .col-mid {
-    background-color: rgba(255, 255, 255, 0.1);
+    font-size: large;
+    background-color: rgb(65, 231, 222);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
     color: rgb(34, 43, 210);
-    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     box-shadow: 0 0 10px rgba(252, 0, 0, 0.3);
 }
 .col-mid ul {
