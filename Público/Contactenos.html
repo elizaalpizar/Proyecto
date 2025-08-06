@@ -9,13 +9,26 @@
 <body>
   <main>
     <h1>Contáctenos</h1>
-    <form id="contactForm" action="contacto.php" method="POST" novalidate>
+    <form id="contactForm" novalidate>
       
       <label for="name">Nombre completo</label>
-      <input type="text" id="name" name="name" required />
+      <input
+        type="text"
+        id="name"
+        name="name"
+        pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+"
+        title="Solo letras y espacios"
+        required
+      />
       
       <label for="email">Correo electrónico</label>
-      <input type="email" id="email" name="email" required />
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="tucorreo@dominio.com"
+        required
+      />
       
       <label for="message">Consulta / Comentarios</label>
       <textarea id="message" name="message" rows="6" required></textarea>
@@ -35,6 +48,7 @@
     
     <div id="formMessage"></div>
   </main>
+
   <script src="../JS/ValidaciónContactenos.js"></script>
 </body>
 </html>
