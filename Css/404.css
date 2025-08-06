@@ -1,0 +1,29 @@
+.pagina-error {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.pagina-error h2 {
+  font-size: 6rem;
+  margin-bottom: 20px;
+  color: #ff5e5e;
+}
+
+.pagina-error p {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+}
+
+.boton-volver {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #787FF6;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.boton-volver:hover {
+  background-color: #5e66d1;
+}
