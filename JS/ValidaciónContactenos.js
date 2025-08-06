@@ -1,29 +1,29 @@
-document.getElementById('contactForm').addEventListener('submit', function(e) {
+document.getElementById('contactForm').addEventListener('submit', function (e) {
   e.preventDefault();
 
   // Referencias a inputs y mensajes
-  const nameField    = document.getElementById('name');
-  const emailField   = document.getElementById('email');
+  const nameField = document.getElementById('name');
+  const emailField = document.getElementById('email');
   const messageField = document.getElementById('message');
-  const ratingField  = document.getElementById('rating');
+  const ratingField = document.getElementById('rating');
 
-  const nameError    = document.getElementById('nameError');
-  const emailError   = document.getElementById('emailError');
+  const nameError = document.getElementById('nameError');
+  const emailError = document.getElementById('emailError');
   const messageError = document.getElementById('messageError');
-  const ratingError  = document.getElementById('ratingError');
+  const ratingError = document.getElementById('ratingError');
 
   // Expresiones regulares
-  const nameRegex  = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+  const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.(com)$/i;
 
   // Limpiar errores previos
   [nameError, emailError, messageError, ratingError].forEach(el => el.textContent = '');
 
   // Valores
-  const nameVal    = nameField.value.trim();
-  const emailVal   = emailField.value.trim();
+  const nameVal = nameField.value.trim();
+  const emailVal = emailField.value.trim();
   const messageVal = messageField.value.trim();
-  const ratingVal  = ratingField.value;
+  const ratingVal = ratingField.value;
 
   // Indicador de validez
   let isValid = true;
@@ -60,14 +60,30 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
 
   // Mostrar alert y redirigir si todo está bien
   if (isValid) {
-    alert('Tu consulta fue enviada con éxito.');
-    window.location.href = '../Público/PaginaPrincipal.html';
-  } else {
-    // Enfocar el primer campo con error
-    const firstError = document.querySelector('.error-message:not(:empty)');
-    if (firstError) {
-      const fieldId = firstError.id.replace('Error', '');
-      document.getElementById(fieldId).focus();
-    }
+    const data = {
+      name: nameVal,
+      email: emailVal,
+      message: messageVal,
+      rating: ratingVal
+    };
+
+    fetch('https://formspree.io/f/xyzabc', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(resp => {
+        if (resp.ok) {
+          alert('Tu consulta fue enviada con éxito.');
+          window.location.href = '../Público/PaginaPrincipal.html';
+        } else {
+          throw new Error('Falló el envío');
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert('Error al enviar tu consulta. Intenta de nuevo más tarde.');
+      });
   }
+
 });
