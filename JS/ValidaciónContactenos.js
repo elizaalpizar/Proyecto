@@ -61,7 +61,7 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   // Mostrar alert y redirigir si todo está bien
   if (isValid) {
     alert('Tu consulta fue enviada con éxito.');
-    window.location.href = 'index.html';
+    window.location.href = '../Público/PaginaPrincipal.html';
   } else {
     // Enfocar el primer campo con error
     const firstError = document.querySelector('.error-message:not(:empty)');
