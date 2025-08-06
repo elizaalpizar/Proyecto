@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ubicación - Energym Costa Rica</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
-
-  <!-- Font Awesome (por si lo usas en otras secciones) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
-
-  <style>
+/*hola*/
     :root {
       --color-primario: #00bcd4;
       --color-secundario: #80deea;
@@ -133,6 +120,3 @@
         height: 300px;
       }
     }
-  </style>
-</head>
-<body>
