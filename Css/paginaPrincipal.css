@@ -1,168 +1,189 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Energym Costa Rica - Inicio</title>
+:root {
+  --color-primario: #00bcd4;
+  --color-secundario: #80deea;
+  --color-fondo: #f0f9fa;
+  --color-texto: #1a1a1a;
+  --fuente: 'Montserrat', sans-serif;
+}
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+body {
+  font-family: var(--fuente);
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  line-height: 1.6;
+}
 
-  <!-- Estilo -->
-  <style>
-    :root {
-      --color-primario: #00bcd4;     /* Turquesa */
-      --color-secundario: #80deea;   /* Celeste claro */
-      --color-fondo: #f0f9fa;
-      --color-texto: #1a1a1a;
-      --fuente: 'Montserrat', sans-serif;
-    }
+header {
+  background-color: var(--color-primario);
+  padding: 25px 40px;
+  color: white;
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: auto;
+}
 
-    body {
-      font-family: var(--fuente);
-      background-color: var(--color-fondo);
-      color: var(--color-texto);
-      line-height: 1.6;
-    }
+.navbar h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+}
 
-    /* ===== HEADER ===== */
-    header {
-      background-color: var(--color-primario);
-      padding: 25px 40px;
-      color: white;
-    }
+.navbar ul {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+}
 
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: auto;
-    }
+.navbar ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px 15px;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
 
-    .navbar h1 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: white;
-    }
+.navbar ul li a:hover {
+  background-color: var(--color-secundario);
+  color: #000;
+}
 
-    .navbar ul {
-      display: flex;
-      list-style: none;
-      gap: 25px;
-    }
+.slider img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  margin-bottom: 30px;
+}
 
-    .navbar ul li a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      padding: 10px 15px;
-      border-radius: 6px;
-      transition: background 0.3s;
-    }
+section {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
 
-    .navbar ul li a:hover {
-      background-color: var(--color-secundario);
-      color: #000;
-    }
+h2 {
+  font-size: 2rem;
+  color: var(--color-primario);
+  margin-bottom: 20px;
+  text-align: center;
+}
 
-    /* ===== SLIDER ===== */
-    .slider img {
-      width: 100%;
-      max-height: 400px;
-      object-fit: cover;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      margin-bottom: 30px;
-    }
+.info-general,
+.testimonios {
+  text-align: center;
+}
 
-    section {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
+.info-general p {
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: auto;
+}
 
-    h2 {
-      font-size: 2rem;
-      color: var(--color-primario);
-      margin-bottom: 20px;
-      text-align: center;
-    }
+.testimonial {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+}
 
-    .info-general, .testimonios {
-      text-align: center;
-    }
+.redes-sociales {
+  background-color: white;
+  text-align: center;
+  padding: 50px 20px;
+  margin-top: 50px;
+}
 
-    .info-general p {
-      font-size: 1.1rem;
-      max-width: 800px;
-      margin: auto;
-    }
+.redes-sociales-icons {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 25px;
+}
 
-    .testimonial {
-      background-color: white;
-      padding: 20px;
-      border-radius: 10px;
-      margin: 20px auto;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      max-width: 700px;
-    }
+.redes-sociales a {
+  font-size: 2.5rem;
+  color: #333;
+  transition: transform 0.3s, color 0.3s;
+}
 
-    /* ===== REDES SOCIALES ===== */
-    .redes-sociales {
-      background-color: white;
-      text-align: center;
-      padding: 50px 20px;
-      margin-top: 50px;
-    }
+.redes-sociales a:hover {
+  transform: scale(1.3);
+}
 
-    .redes-sociales-icons {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      margin-top: 25px;
-    }
+.redes-sociales a.facebook:hover {
+  color: #1877f2;
+}
 
-    .redes-sociales a {
-      font-size: 2.5rem;
-      color: #333;
-      transition: transform 0.3s, color 0.3s;
-    }
+.redes-sociales a.instagram:hover {
+  color: #c13584;
+}
 
-    .redes-sociales a:hover {
-      transform: scale(1.3);
-    }
+.redes-sociales a.tiktok:hover {
+  color: #ff0050;
+}
 
-    /* Colores específicos para cada red social */
-    .redes-sociales a.facebook:hover {
-      color: #1877f2; /* Azul Facebook */
-    }
+footer {
+  background-color: var(--color-primario);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+}
 
-    .redes-sociales a.instagram:hover {
-      color: #c13584; /* Morado Instagram */
-    }
+.zonas {
+  text-align: center;
+  padding: 40px 20px;
+}
 
-    .redes-sociales a.tiktok:hover {
-      color: #ff0050; /* Rojo TikTok */
-    }
+.zona-botones {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
 
-    /* ===== FOOTER ===== */
-    footer {
-      background-color: var(--color-primario);
-      color: white;
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-    }
-  </style>
-</head>
-<body>
+.zona-botones button {
+  background-color: var(--color-primario);
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.zona-botones button:hover {
+  background-color: var(--color-secundario);
+  color: #000;
+  transform: scale(1.05);
+}
+
+.zona-imagen img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.zona-imagen p {
+  font-size: 1.1rem;
+  color: #555;
+}

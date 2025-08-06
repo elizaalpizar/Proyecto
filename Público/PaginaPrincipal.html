@@ -2,7 +2,9 @@
 <html lang="es">
 
 <head>
-  <!-- ENCABEZADO -->
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../Css/paginaPrincipal.css">
+  <title>Página Principal</title>
   <header>
     <nav class="navbar">
       <h1>Energym</h1>
@@ -13,10 +15,6 @@
       </ul>
     </nav>
   </header>
-
-
-  <!-- SLIDER -->
-  <!-- ZONAS DE ENTRENAMIENTO -->
   <section class="zonas">
     <h2>Zonas de Entrenamiento</h2>
     <div class="zona-botones">
@@ -29,54 +27,6 @@
       <p>Haz clic en una zona para ver la imagen</p>
     </div>
   </section>
-
-  <!-- ESTILOS PARA LA NUEVA SECCIÓN (puedes añadir esto dentro del <style>) -->
-  <style>
-    .zonas {
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    .zona-botones {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-    }
-
-    .zona-botones button {
-      background-color: var(--color-primario);
-      color: white;
-      border: none;
-      padding: 15px 25px;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
-    }
-
-    .zona-botones button:hover {
-      background-color: var(--color-secundario);
-      color: #000;
-      transform: scale(1.05);
-    }
-
-    .zona-imagen img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .zona-imagen p {
-      font-size: 1.1rem;
-      color: #555;
-    }
-  </style>
-
-  <!-- SCRIPT PARA MOSTRAR LA IMAGEN SEGÚN BOTÓN -->
   <script>
     function mostrarZona(zona) {
       const contenedor = document.getElementById('imagenZona');
@@ -97,9 +47,6 @@
       contenedor.innerHTML = `<img src="${imagen}" alt="${alt}"><p>${alt}</p>`;
     }
   </script>
-
-
-  <!-- INFORMACIÓN GENERAL -->
   <section class="info-general">
     <h2>Bienvenido a Energym</h2>
     <p>
@@ -108,7 +55,6 @@
     </p>
   </section>
 
-  <!-- TESTIMONIOS -->
   <section class="testimonios">
     <h2>Lo que opinan nuestros atletas</h2>
     <div class="testimonial">
@@ -119,7 +65,6 @@
     </div>
   </section>
 
-  <!-- REDES SOCIALES -->
   <section class="redes-sociales">
     <h2>Síguenos en redes sociales</h2>
     <div class="redes-sociales-icons">
@@ -135,14 +80,10 @@
     </div>
   </section>
 
-  <!-- PIE DE PÁGINA -->
   <footer>
     <p>&copy; 2025 Energym Costa Rica. Todos los derechos reservados.</p>
   </footer>
 
   </body>
-<<<<<<< HEAD
 
-=======
->>>>>>> e16555ee5523a979e1f096b9332500f8e9e0342b
 </html>
