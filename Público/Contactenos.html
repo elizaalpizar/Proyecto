@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contáctenos</title>
+  <link rel="stylesheet" href="../Css/Contactenos.css" />
+</head>
+<body>
+  <main>
+    <h1>Contáctenos</h1>
+    <form id="contactForm" action="contacto.php" method="POST" novalidate>
+      
+      <label for="name">Nombre completo</label>
+      <input type="text" id="name" name="name" required />
+      
+      <label for="email">Correo electrónico</label>
+      <input type="email" id="email" name="email" required />
+      
+      <label for="message">Consulta / Comentarios</label>
+      <textarea id="message" name="message" rows="6" required></textarea>
+      
+      <label for="rating">Evalúa tu experiencia</label>
+      <select id="rating" name="rating" required>
+        <option value="">-- Selecciona una opción --</option>
+        <option value="1">1 – Muy deficiente</option>
+        <option value="2">2 – Deficiente</option>
+        <option value="3">3 – Aceptable</option>
+        <option value="4">4 – Buena</option>
+        <option value="5">5 – Excelente</option>
+      </select>
+      
+      <button type="submit">Enviar</button>
+    </form>
+    
+    <div id="formMessage"></div>
+  </main>
+  <script src="../JS/ValidaciónContactenos.js"></script>
+</body>
+</html>
