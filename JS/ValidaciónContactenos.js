@@ -64,5 +64,5 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
 
   // Si todo está bien, confirmar y redirigir
   alert('Tu consulta fue enviada con éxito.');
-  window.location.href = 'index.html';
+  window.location.href = '../Público/PaginaPrincipal.html';
 });
