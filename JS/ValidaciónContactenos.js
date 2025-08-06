@@ -1,7 +1,7 @@
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
 
-  // Referencias a inputs y mensajes de error
+  // Referencias a inputs y mensajes
   const nameField    = document.getElementById('name');
   const emailField   = document.getElementById('email');
   const messageField = document.getElementById('message');
@@ -19,13 +19,13 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   // Limpiar errores previos
   [nameError, emailError, messageError, ratingError].forEach(el => el.textContent = '');
 
-  // Valores a validar
+  // Valores
   const nameVal    = nameField.value.trim();
   const emailVal   = emailField.value.trim();
   const messageVal = messageField.value.trim();
   const ratingVal  = ratingField.value;
 
-  // Bandera global de validez
+  // Indicador de validez
   let isValid = true;
 
   // Validar Nombre
@@ -58,12 +58,12 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     isValid = false;
   }
 
-  // Si todo es válido, mostrar alerta y redirigir
+  // Mostrar alert y redirigir si todo está bien
   if (isValid) {
     alert('Tu consulta fue enviada con éxito.');
-    window.location.href = '../Público/PaginaPrincipal.html';
+    window.location.href = 'index.html';
   } else {
-    // Opcional: enfocar el primer campo con error
+    // Enfocar el primer campo con error
     const firstError = document.querySelector('.error-message:not(:empty)');
     if (firstError) {
       const fieldId = firstError.id.replace('Error', '');
