@@ -42,3 +42,10 @@ button:hover {
   margin-top: 1rem;
   font-weight: bold;
 }
+.error-message {
+  display: block;
+  color: red;
+  font-size: 0.9em;
+  margin-top: 4px;
+  min-height: 1.2em;
+}

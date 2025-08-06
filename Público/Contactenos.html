@@ -12,26 +12,18 @@
     <form id="contactForm" novalidate>
       
       <label for="name">Nombre completo</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+"
-        title="Solo letras y espacios"
-        required
-      />
+      <input type="text" id="name" name="name" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Solo letras y espacios" required/>
+      <small class="error-message" id="nameError"></small>
       
       <label for="email">Correo electrónico</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        placeholder="tucorreo@dominio.com"
-        required
-      />
+      <input type="email" id="email" name="email" placeholder="tucorreo@dominio.com" required/>
+      <small class="error-message" id="emailError"></small>
+
       
       <label for="message">Consulta / Comentarios</label>
       <textarea id="message" name="message" rows="6" required></textarea>
+      <small class="error-message" id="messageError"></small>
+
       
       <label for="rating">Evalúa tu experiencia</label>
       <select id="rating" name="rating" required>
@@ -42,6 +34,7 @@
         <option value="4">4 – Buena</option>
         <option value="5">5 – Excelente</option>
       </select>
+      <small class="error-message" id="ratingError"></small>
       
       <button type="submit">Enviar</button>
     </form>
