@@ -1,7 +1,7 @@
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
 
-  // Referencias a campos y sus contenedores de error
+  // Referencias a inputs y mensajes
   const nameField    = document.getElementById('name');
   const emailField   = document.getElementById('email');
   const messageField = document.getElementById('message');
@@ -13,56 +13,61 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   const ratingError  = document.getElementById('ratingError');
 
   // Expresiones regulares
-  const nameRegex    = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
-  const emailRegex   = /^[^\s@]+@[^\s@]+\.(com)$/i;
+  const nameRegex  = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.(com)$/i;
 
-  // Limpiar errores anteriores
-  [nameError, emailError, messageError, ratingError].forEach(el => {
-    el.textContent = '';
-  });
+  // Limpiar errores previos
+  [nameError, emailError, messageError, ratingError].forEach(el => el.textContent = '');
 
-  // Validación nombre
-  const nameVal = nameField.value.trim();
+  // Valores
+  const nameVal    = nameField.value.trim();
+  const emailVal   = emailField.value.trim();
+  const messageVal = messageField.value.trim();
+  const ratingVal  = ratingField.value;
+
+  // Indicador de validez
+  let isValid = true;
+
+  // Validar Nombre
   if (!nameVal) {
     nameError.textContent = 'El nombre es obligatorio.';
-    nameField.focus();
-    return;
-  }
-  if (!nameRegex.test(nameVal)) {
+    isValid = false;
+  } else if (!nameRegex.test(nameVal)) {
     nameError.textContent = 'Solo letras, tildes y espacios.';
-    nameField.focus();
-    return;
+    isValid = false;
   }
 
-  // Validación email
-  const emailVal = emailField.value.trim();
+  // Validar Email
   if (!emailVal) {
     emailError.textContent = 'El correo es obligatorio.';
-    emailField.focus();
-    return;
-  }
-  if (!emailRegex.test(emailVal)) {
+    isValid = false;
+  } else if (!emailRegex.test(emailVal)) {
     emailError.textContent = 'Formato: usuario@dominio.com';
-    emailField.focus();
-    return;
+    isValid = false;
   }
 
-  // Validación mensaje
-  const messageVal = messageField.value.trim();
+  // Validar Mensaje
   if (!messageVal) {
     messageError.textContent = 'El mensaje no puede estar vacío.';
-    messageField.focus();
-    return;
+    isValid = false;
   }
 
-  // Validación calificación
-  if (!ratingField.value) {
+  // Validar Calificación
+  if (!ratingVal) {
     ratingError.textContent = 'Selecciona una calificación.';
-    ratingField.focus();
-    return;
+    isValid = false;
   }
 
-  // Si todo está bien, confirmar y redirigir
-  alert('Tu consulta fue enviada con éxito.');
-  window.location.href = 'index.html';
+  // Mostrar alert y redirigir si todo está bien
+  if (isValid) {
+    alert('Tu consulta fue enviada con éxito.');
+    window.location.href = 'index.html';
+  } else {
+    // Enfocar el primer campo con error
+    const firstError = document.querySelector('.error-message:not(:empty)');
+    if (firstError) {
+      const fieldId = firstError.id.replace('Error', '');
+      document.getElementById(fieldId).focus();
+    }
+  }
 });
