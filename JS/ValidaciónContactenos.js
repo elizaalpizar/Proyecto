@@ -1,58 +1,68 @@
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
 
+  // Referencias a campos y sus contenedores de error
   const nameField    = document.getElementById('name');
   const emailField   = document.getElementById('email');
   const messageField = document.getElementById('message');
   const ratingField  = document.getElementById('rating');
-  const feedback     = document.getElementById('formMessage');
 
-  feedback.textContent = '';
-  feedback.style.color = 'red';
+  const nameError    = document.getElementById('nameError');
+  const emailError   = document.getElementById('emailError');
+  const messageError = document.getElementById('messageError');
+  const ratingError  = document.getElementById('ratingError');
 
-  // Regex para nombre (solo letras, tildes y espacios)
-  const nameRegex  = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
-  // Regex para email terminado en .com
-  const emailRegex = /^[^\s@]+@[^\s@]+\.(com)$/i;
+  // Expresiones regulares
+  const nameRegex    = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+  const emailRegex   = /^[^\s@]+@[^\s@]+\.(com)$/i;
 
-  if (!nameField.value.trim()) {
-    feedback.textContent = 'El nombre es obligatorio.';
+  // Limpiar errores anteriores
+  [nameError, emailError, messageError, ratingError].forEach(el => {
+    el.textContent = '';
+  });
+
+  // Validación nombre
+  const nameVal = nameField.value.trim();
+  if (!nameVal) {
+    nameError.textContent = 'El nombre es obligatorio.';
     nameField.focus();
     return;
   }
-  
-  if (!nameRegex.test(nameField.value.trim())) {
-    feedback.textContent = 'El nombre solo puede contener letras y espacios.';
+  if (!nameRegex.test(nameVal)) {
+    nameError.textContent = 'Solo letras, tildes y espacios.';
     nameField.focus();
     return;
   }
 
-  if (!emailField.value.trim()) {
-    feedback.textContent = 'El correo es obligatorio.';
+  // Validación email
+  const emailVal = emailField.value.trim();
+  if (!emailVal) {
+    emailError.textContent = 'El correo es obligatorio.';
+    emailField.focus();
+    return;
+  }
+  if (!emailRegex.test(emailVal)) {
+    emailError.textContent = 'Formato: usuario@dominio.com';
     emailField.focus();
     return;
   }
 
-  if (!emailRegex.test(emailField.value.trim())) {
-    feedback.textContent = 'El correo debe tener formato usuario@dominio.com.';
-    emailField.focus();
-    return;
-  }
-
-  if (!messageField.value.trim()) {
-    feedback.textContent = 'El mensaje no puede estar vacío.';
+  // Validación mensaje
+  const messageVal = messageField.value.trim();
+  if (!messageVal) {
+    messageError.textContent = 'El mensaje no puede estar vacío.';
     messageField.focus();
     return;
   }
 
+  // Validación calificación
   if (!ratingField.value) {
-    feedback.textContent = 'Selecciona una calificación.';
+    ratingError.textContent = 'Selecciona una calificación.';
     ratingField.focus();
     return;
   }
 
-  // Si todas las validaciones pasan
+  // Si todo está bien, confirmar y redirigir
   alert('Tu consulta fue enviada con éxito.');
-  // Redireccionar a la página principal
-  window.location.href = '../Público/PaginaPrincipal.html';
+  window.location.href = 'index.html';
 });
