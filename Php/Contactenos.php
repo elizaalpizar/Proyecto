@@ -10,7 +10,7 @@ $mensaje = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING);
 $rating  = filter_input(INPUT_POST, 'rating', FILTER_VALIDATE_INT);
 
 if (!$nombre || !$email || !$mensaje || !$rating) {
-  header('Location: error.html');
+  header('Location: 404.html');
   exit;
 }
 
@@ -25,8 +25,8 @@ $headers  = "From: no-reply@tusitio.com\r\n";
 $headers .= "Reply-To: $email\r\n";
 
 if (mail($destinatario, $asunto, $body, $headers)) {
-  header('Location: gracias.html');
+  header('Location: PaginaPrincipal.html');
 } else {
-  header('Location: error.html');
+  header('Location: 404.html');
 }
 ?>
