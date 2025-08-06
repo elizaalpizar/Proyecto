@@ -1,13 +1,13 @@
 body {
   font-family: Arial, sans-serif;
   margin: 2rem;
-  background: #ff0606;
+  background: aqua;
 }
 
 main {
   max-width: 600px;
   margin: auto;
-  background: #fff;
+  background: #542addad;
   padding: 2rem;
   border-radius: 8px;
 }
@@ -15,6 +15,7 @@ main {
 label {
   display: block;
   margin-top: 1rem;
+  background-color: rgb(213, 157, 117);
 }
 
 input, textarea, select, button {
