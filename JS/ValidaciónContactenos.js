@@ -1,6 +1,4 @@
 document.getElementById('contactForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-
   // Referencias a inputs y mensajes
   const nameField = document.getElementById('name');
   const emailField = document.getElementById('email');
@@ -58,32 +56,8 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
     isValid = false;
   }
 
-  // Mostrar alert y redirigir si todo está bien
-  if (isValid) {
-    const data = {
-      name: nameVal,
-      email: emailVal,
-      message: messageVal,
-      rating: ratingVal
-    };
-
-    fetch('https://formspree.io/f/xyzabc', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    })
-      .then(resp => {
-        if (resp.ok) {
-          alert('Tu consulta fue enviada con éxito.');
-          window.location.href = '../Público/PaginaPrincipal.html';
-        } else {
-          throw new Error('Falló el envío');
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        alert('Error al enviar tu consulta. Intenta de nuevo más tarde.');
-      });
+  // Si no es válido, prevenir envío
+  if (!isValid) {
+    e.preventDefault();
   }
-
 });
