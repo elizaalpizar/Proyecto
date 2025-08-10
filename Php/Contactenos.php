@@ -11,7 +11,7 @@ try {
     $mail->Host       = 'eliza.alpizar2401@gmail.com';
     $mail->SMTPAuth   = true;
     $mail->Username   = 'eliza.alpizar2401@gmail.com'; // tu cuenta Gmail
-    $mail->Password   = 'Bianka04072015*';   // usa contraseña de aplicación
+    $mail->Password   = '';   // usa contraseña de aplicación
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = 587;
 
