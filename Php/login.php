@@ -19,7 +19,7 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 
 // Consulta para verificar las credenciales
-$sql = "SELECT id, usuario, contraseña, nombre, apellido1, apellido2, email, telefono 
+$sql = "SELECT identificacion, usuario, contrasena, nombre, apellido1, apellido2, correo, telefono 
         FROM atletas 
         WHERE usuario = ?";
 
@@ -31,14 +31,14 @@ if (!$stmt) {
 odbc_execute($stmt, array($username));
 $row = odbc_fetch_array($stmt);
 
-if ($row && password_verify($password, $row['contraseña'])) {
+if ($row && password_verify($password, $row['contrasena'])) {
     // Autenticación exitosa
-    $_SESSION['user_id'] = $row['id'];
+    $_SESSION['user_id'] = $row['identificacion'];
     $_SESSION['username'] = $row['usuario'];
     $_SESSION['nombre'] = $row['nombre'];
     $_SESSION['apellido1'] = $row['apellido1'];
     $_SESSION['apellido2'] = $row['apellido2'];
-    $_SESSION['email'] = $row['email'];
+    $_SESSION['correo'] = $row['correo'];
     $_SESSION['telefono'] = $row['telefono'];
     $_SESSION['logged_in'] = true;
     

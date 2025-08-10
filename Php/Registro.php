@@ -3,7 +3,7 @@ $server   = "server.asralabs.com,14330";
 $database = "Proyecto_Progra3";
 $username = "sa";
 $password = "19861997.Sr";
-$dsn      = "Driver={ODBC Driver 17 for SQL Server};Server=$server;Database=$database;";
+$connectionString = "Driver={ODBC Driver 17 for SQL Server};Server=$server;Database=$database;";
 
 $identificacion = trim($_POST['identificacion'] ?? '');
 $usuario        = trim($_POST['usuario'] ?? '');
@@ -42,14 +42,14 @@ if (count($errors) > 0) {
 
 $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-$conn = odbc_connect($dsn, $username, $password);
+$conn = odbc_connect($connectionString, $username, $password);
 if (!$conn) {
     die("<p style='color:red;'>Error de conexión: " . odbc_errormsg() . "</p>");
 }
 
 $sql = "
   INSERT INTO atletas
-    (identificacion, usuario, password_hash, nombre,
+    (identificacion, usuario, contrasena, nombre,
      apellido1, apellido2, correo, telefono)
   VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 ";
