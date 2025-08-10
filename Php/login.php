@@ -15,8 +15,18 @@ if (!$conn) {
 }
 
 // Obtener datos del formulario
-$username = $_POST['username'];
-$password = $_POST['password'];
+$username = trim($_POST['username'] ?? '');
+$password = $_POST['password'] ?? '';
+
+// Validar que se recibieron los datos
+if (empty($username) || empty($password)) {
+    odbc_close($conn);
+    echo "<script>
+        alert('Por favor, complete todos los campos.');
+        window.location.href = '../Público/InicioSesion.html';
+    </script>";
+    exit();
+}
 
 // Consulta para verificar las credenciales
 $sql = "SELECT identificacion, usuario, contrasena, nombre, apellido1, apellido2, correo, telefono 
@@ -25,6 +35,7 @@ $sql = "SELECT identificacion, usuario, contrasena, nombre, apellido1, apellido2
 
 $stmt = odbc_prepare($conn, $sql);
 if (!$stmt) {
+    odbc_close($conn);
     die("Error en la preparación de la consulta: " . odbc_errormsg());
 }
 
@@ -46,7 +57,7 @@ if ($row && password_verify($password, $row['contrasena'])) {
     odbc_close($conn);
     
     // Redirigir a la página de reservación
-    header("Location: ../Privado/Reservacion.html");
+    header("Location: ../Privado/Reservacion.php");
     exit();
 } else {
     // Autenticación fallida

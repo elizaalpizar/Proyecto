@@ -39,7 +39,7 @@ $fecha_creacion = date('Y-m-d H:i:s');
 if (strtotime($fecha) < strtotime(date('Y-m-d'))) {
     echo "<script>
         alert('No se puede reservar para fechas pasadas.');
-        window.location.href = '../Privado/Reservacion.html';
+        window.location.href = '../Privado/Reservacion.php';
     </script>";
     exit();
 }
@@ -52,7 +52,7 @@ odbc_execute($stmt_check, array($fecha, $hora, $servicio));
 if (odbc_fetch_array($stmt_check)) {
     echo "<script>
         alert('Ya existe una reservación para esa fecha, hora y servicio. Por favor, seleccione otro horario.');
-        window.location.href = '../Privado/Reservacion.html';
+        window.location.href = '../Privado/Reservacion.php';
     </script>";
     exit();
 }
@@ -71,12 +71,12 @@ $result = odbc_execute($stmt_insert, array($id_atleta, $servicio, $fecha, $hora,
 if ($result) {
     echo "<script>
         alert('¡Reservación realizada con éxito!');
-        window.location.href = '../Privado/Reservacion.html';
+        window.location.href = '../Privado/Reservacion.php';
     </script>";
 } else {
     echo "<script>
         alert('Error al procesar la reservación: " . odbc_errormsg() . "');
-        window.location.href = '../Privado/Reservacion.html';
+        window.location.href = '../Privado/Reservacion.php';
     </script>";
 }
 

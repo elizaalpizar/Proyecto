@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+// Verificar si el usuario está autenticado
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header("Location: ../Público/InicioSesion.html");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -92,9 +101,6 @@
     </style>
 </head>
 <body>
-    <!-- Verificación de sesión -->
-    <?php include '../Php/verificar_sesion.php'; ?>
-    
     <div class="header-nav">
         <h1>Energym Costa Rica</h1>
         <p>Panel de Reservaciones</p>
