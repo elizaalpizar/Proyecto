@@ -1,9 +1,10 @@
 <?php
+header('Content-Type: text/html; charset=UTF-8');
 $server   = "server.asralabs.com,14330";
 $database = "Proyecto_Progra3";
 $username = "sa";
 $password = "19861997.Sr";
-$connectionString = "Driver={ODBC Driver 17 for SQL Server};Server=$server;Database=$database;";
+$connectionString = "Driver={ODBC Driver 17 for SQL Server};Server=$server;Database=$database;UID=$username;PWD=$password;CharacterSet=UTF8;";
 
 // Procesar variables POST
 $identificacion = trim($_POST['identificacion'] ?? '');
@@ -46,7 +47,7 @@ if (count($errors) > 0) {
 $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
 // Conexión a la base de datos
-$conn = odbc_connect($connectionString, $username, $password);
+$conn = odbc_connect($connectionString, '', '');
 if (!$conn) {
     $errorMsg = odbc_errormsg();
     die("<p style='color:red;'>Error de conexión: $errorMsg</p>");
