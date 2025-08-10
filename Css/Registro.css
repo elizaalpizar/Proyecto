@@ -6,7 +6,6 @@ body {
   color: #fff;
 }
 
-/* Navbar */
 header {
   background: rgba(0, 0, 0, 0.8);
   padding: 15px 0;
@@ -44,7 +43,6 @@ header {
   color: #00d4ff;
 }
 
-/* Formulario */
 main {
   max-width: 450px;
   margin: 40px auto;
@@ -132,6 +130,6 @@ footer {
 }
 
 #mensajeError p {
-  color: red;
+  color: rgb(255, 255, 255);
   margin: 5px 0;
 }
