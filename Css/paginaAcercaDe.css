@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --color-primario: #00bcd4;
   --color-secundario: #80deea;
   --color-fondo: #f0f9fa;
@@ -61,12 +61,6 @@ h1{
   color: #000;
 }
 
-.servicios {
-  text-align: center;
-  padding: 60px 20px;
-  background-color: var(--color-fondo);
-}
-
 .card-container {
   display: flex;
   justify-content: center;
@@ -84,35 +78,18 @@ h1{
   transition: transform 0.3s ease;
 }
 
-.card:hover {
-  transform: scale(1.03);
-}
-
-.card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
 .card-title {
   background-color: var(--color-primario);
   color: #000;
   font-weight: bold;
   padding: 10px;
-  font-size: 1.1rem;
-}
-
-.card-info {
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-  font-size: 0.95rem;
-  color: #333;
+  font-size: 3ch;
+  text-align: center;
 }
 
 .card-description {
   padding: 0 15px 20px;
-  font-size: 0.95rem;
+  font-size: 120%;
   color: #555;
   text-align: left;
 }
@@ -123,4 +100,246 @@ footer {
   text-align: center;
   padding: 20px;
   font-size: 0.9rem;
+}
+
+.acercaDe {
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-grid {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    "quienes info"
+    "valores mision"
+    "vision  vision";
+}
+
+.card-quienes { grid-area: quienes; }
+.card-info    { grid-area: info;    }
+.card-valores { grid-area: valores; }
+.card-mision  { grid-area: mision;  }
+.card-vision  { grid-area: vision;  }
+
+.card {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.card-title {
+  background-color: var(--color-primario);
+  color: #000;
+  font-weight: 700;
+  padding: 12px;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.card-description ul {
+  list-style: none;
+  padding-left: 0;
+}
+.card-description ul li {
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 24px;
+}
+.card-description ul li::before {
+  content: '✔';
+  position: absolute;
+  left: 0;
+  color: var(--color-primario);
+  font-size: 0.85rem;
+  top: 2px;
+}
+
+
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "quienes"
+      "info"
+      "valores"
+      "mision"
+      "vision";
+  }
+} */
+/*--------------------------------------
+  Variables globales
+--------------------------------------*/
+:root {
+  --color-primario: #00bcd4;
+  --color-secundario: #80deea;
+  --color-fondo: #f0f9fa;
+  --color-texto: #1a1a1a;
+  --fuente: 'Montserrat', sans-serif;
+}
+
+/*--------------------------------------
+  Reset y box-sizing
+--------------------------------------*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*--------------------------------------
+  Estilos base del body
+--------------------------------------*/
+body {
+  font-family: var(--fuente);
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  line-height: 1.6;
+}
+
+/*--------------------------------------
+  Header y barra de navegación
+--------------------------------------*/
+header {
+  background-color: var(--color-primario);
+  padding: 25px 40px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.navbar h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+}
+
+.navbar ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px 15px;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.navbar ul li a:hover {
+  background-color: var(--color-secundario);
+  color: #000;
+}
+
+.servicios {
+  padding: 10px 10px;
+  max-width: 1200px;
+  margin: 90px;
+  align-items: center;
+}
+
+.servicios > h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--color-primario);
+  margin-bottom: 40px;
+}
+
+.about-grid {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    "quienes info"
+    "valores mision"
+    "vision vision";
+}
+
+.card-quienes { grid-area: quienes; }
+.card-info    { grid-area: info;    }
+.card-valores { grid-area: valores; }
+.card-mision  { grid-area: mision;  }
+.card-vision  { grid-area: vision;  }
+
+/*--------------------------------------
+  Tarjeta general
+--------------------------------------*/
+.card {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.card-title {
+  background-color: var(--color-primario);
+  color: #000;
+  font-weight: 700;
+  padding: 12px;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.card-description {
+  padding: 15px;
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Listas dentro de tarjetas */
+.card-description ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 8px;
+}
+
+.card-description ul li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.card-description ul li::before {
+  content: '✔';
+  position: absolute;
+  left: 0;
+  top: 2px;
+  color: var(--color-primario);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "quienes"
+      "info"
+      "valores"
+      "mision"
+      "vision";
+  }
+}
+
+footer {
+  background-color: var(--color-primario);
+  color: white;
+  text-align: center;
+  padding: 30px 20px;
+  font-size: 130%;
+  margin-top: 60px;
 }
