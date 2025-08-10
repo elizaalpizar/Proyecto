@@ -1,66 +1,100 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Registro de Atleta - Energym Costa Rica</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Zonas Deportivas - Energym</title>
   <link rel="stylesheet" href="../Css/Catalogo_Menu.css">
 </head>
 <body>
 
-  <header>
-    <nav class="navbar">
-      <h1>Energym</h1>
-      <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="PagAcercaDe.html">Acerca de</a></li>
-        <li><a href="Servicios.html">Servicios</a></li>
-        <li><a href="Mapa.html">Ubicación</a></li>
-        <li><a href="Contactenos.html">Contáctenos</a></li>
-        <li><a href="RegistroAtleta.html" aria-current="page">Registro</a></li>
-        <li><a href="InicioSesion.html">Iniciar Sesión</a></li>
-      </ul>
-    </nav>
-  </header>
+  <h1>Catálogo de Zonas Deportivas - Energym</h1>
 
-  <main>
-    <h2>Registro de Atleta</h2>
-    <form id="formRegistro" action="Registro.php" method="POST" novalidate>
-      
-      <label for="identificacion">Identificación (única)</label>
-      <input type="text" id="identificacion" name="identificacion" required pattern="[0-9]{9,12}" placeholder="Ej: 123456789" />
+  <form id="zonaForm">
+    <input type="hidden" id="zonaId">
+    <label for="nombre">Nombre de la Zona:</label>
+    <input type="text" id="nombre" required>
+    
+    <label for="descripcion">Descripción:</label>
+    <textarea id="descripcion" required></textarea>
+    
+    <button type="submit">Guardar</button>
+  </form>
 
-      <label for="usuario">Usuario</label>
-      <input type="text" id="usuario" name="usuario" required minlength="4" placeholder="Mínimo 4 caracteres" />
+  <h2>Listado de Zonas Deportivas</h2>
+  <table id="zonasTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
 
-      <label for="password">Contraseña</label>
-      <input type="password" id="password" name="password" required minlength="6" placeholder="Mínimo 6 caracteres" />
+  <script>
+    let zonas = [];
+    let contadorId = 1;
 
-      <label for="nombre">Nombre</label>
-      <input type="text" id="nombre" name="nombre" required />
+    const zonaForm = document.getElementById("zonaForm");
+    const zonaId = document.getElementById("zonaId");
+    const nombre = document.getElementById("nombre");
+    const descripcion = document.getElementById("descripcion");
+    const zonasTable = document.querySelector("#zonasTable tbody");
 
-      <label for="apellido1">Primer Apellido</label>
-      <input type="text" id="apellido1" name="apellido1" required />
+    zonaForm.addEventListener("submit", function(e) {
+      e.preventDefault();
 
-      <label for="apellido2">Segundo Apellido</label>
-      <input type="text" id="apellido2" name="apellido2" required />
+      if (zonaId.value) {
+        const id = parseInt(zonaId.value);
+        const zona = zonas.find(z => z.id === id);
+        zona.nombre = nombre.value;
+        zona.descripcion = descripcion.value;
+        zonaId.value = "";
+      } else {
+        zonas.push({
+          id: contadorId++,
+          nombre: nombre.value,
+          descripcion: descripcion.value
+        });
+      }
 
-      <label for="correo">Correo Electrónico</label>
-      <input type="email" id="correo" name="correo" required placeholder="ejemplo@correo.com" />
+      zonaForm.reset();
+      renderZonas();
+    });
 
-      <label for="telefono">Teléfono</label>
-      <input type="tel" id="telefono" name="telefono" required pattern="[0-9]{8}" placeholder="8 dígitos" />
+    function renderZonas() {
+      zonasTable.innerHTML = "";
+      zonas.forEach(zona => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${zona.id}</td>
+          <td>${zona.nombre}</td>
+          <td>${zona.descripcion}</td>
+          <td>
+            <button onclick="editarZona(${zona.id})">Editar</button>
+            <button onclick="eliminarZona(${zona.id})">Eliminar</button>
+          </td>
+        `;
+        zonasTable.appendChild(row);
+      });
+    }
 
-      <button type="submit">Registrarse</button>
-    </form>
+    window.editarZona = function(id) {
+      const zona = zonas.find(z => z.id === id);
+      zonaId.value = zona.id;
+      nombre.value = zona.nombre;
+      descripcion.value = zona.descripcion;
+    };
 
-    <div id="mensajeError" role="alert"></div>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Energym Costa Rica. Todos los derechos reservados.</p>
-  </footer>
+    window.eliminarZona = function(id) {
+      zonas = zonas.filter(z => z.id !== id);
+      renderZonas();
+    };
+  </script>
 
 </body>
 </html>
