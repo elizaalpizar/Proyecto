@@ -4,7 +4,6 @@ $database = "ferreteria";
 $username = "felipe";
 $password = "Felipe0911";
 
-// Cadena de conexión ODBC
 $connectionString = "Driver={ODBC Driver 17 for SQL Server};Server=$server;Database=$database;";
 $conn = odbc_connect($connectionString, $username, $password);
 
