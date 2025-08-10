@@ -1,8 +1,8 @@
 <?php
-$server = "FELIPE";
-$database = "ferreteria";
-$username = "felipe";
-$password = "Felipe0911";
+$server = "server.asralabs.com,14330";
+$database = "Proyecto_Progra3";
+$username = "sa";
+$password = "19861997.Sr";
 
 $connectionString = "Driver={ODBC Driver 17 for SQL Server};Server=$server;Database=$database;";
 $conn = odbc_connect($connectionString, $username, $password);
