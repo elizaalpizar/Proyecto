@@ -1,6 +1,5 @@
 <?php
-// configuración de destinatario y asunto
-$destinatario = 'tu-correo@dominio.com';
+$destinatario = 'eliza.alpizar2401@gmail.com';
 $asunto       = 'Nueva consulta desde Contacto – Sitio Atletas';
 
 // sanitizar y validar datos
@@ -21,7 +20,7 @@ $body .= "Calificación: $rating\n\n";
 $body .= "Mensaje:\n$mensaje\n";
 
 // encabezados
-$headers  = "From: no-reply@tusitio.com\r\n";
+$headers  = "From: eliza.alpizar2401@gmail.com\r\n";
 $headers .= "Reply-To: $email\r\n";
 
 if (mail($destinatario, $asunto, $body, $headers)) {
