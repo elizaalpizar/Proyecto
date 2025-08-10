@@ -63,7 +63,7 @@ $params = [
   $apellido1,
   $apellido2,
   $correo,
-  $telefono
+  $telefono 
 ];
 
 $ok = odbc_execute($stmt, $params);
