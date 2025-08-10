@@ -46,7 +46,7 @@ if ($conn2) {
     echo "<p style='color:green;'>✅ Conexión exitosa simulando Registro.php</p>";
     
     // Probar INSERT (sin ejecutarlo realmente)
-    $sql = "INSERT INTO atletas (identificacion, usuario, password_hash, nombre, apellido1, apellido2, correo, telefono) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO atletas (identificacion, usuario, contrasena, nombre, apellido1, apellido2, correo, telefono) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = odbc_prepare($conn2, $sql);
     
     if ($stmt) {
