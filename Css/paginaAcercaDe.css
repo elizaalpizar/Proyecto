@@ -24,7 +24,9 @@ header {
   padding: 25px 40px;
   color: white;
 }
-
+h1{
+  background-color: #00bcd4;
+}
 .navbar {
   display: flex;
   justify-content: space-between;
