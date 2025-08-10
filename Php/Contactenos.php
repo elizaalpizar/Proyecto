@@ -1,28 +1,28 @@
 <?php
-var_dump($_POST);
-exit;
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 $destinatario = 'eliza.alpizar2401@gmail.com';
-$asunto       = 'Nueva consulta desde Contacto – Sitio Atletas';
 
 $nombre  = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
 $email   = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-$mensaje = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING);
+$mensaje = trim($_POST['message']);
 $rating  = filter_input(INPUT_POST, 'rating', FILTER_VALIDATE_INT);
 
-if (!$name || !$email || !$rating || strlen($message) < 20) {
-  header('Location: ../Público/404.html');
-  exit;
+if (!$nombre || !$email || !$mensaje || !$rating) {
+    header('Location: ../Público/404.html');
+    exit;
 }
 
-$body = "Nombre: $name\nCorreo: $email\nCalificación: $rating\n\n$message";
-$hdrs = "From: eliza.alpizar2401@gmail.com\r\nReply-To: $email\r\n";
+$asunto = 'Consulta desde Contáctenos';
+$body   = "Nombre: {$nombre}\n"
+        . "Email: {$email}\n"
+        . "Valoración: {$rating}\n\n"
+        . "Mensaje:\n{$mensaje}\n";
 
-if (mail($dest, 'Consulta Atleta', $body, $hdrs)) {
-  header('Location: ../Público/PaginaPrincipal.html');
+$headers  = "From: no-reply@tu-dominio.com\r\n";
+$headers .= "Reply-To: {$email}\r\n";
+
+// 6. Envío
+if (mail($destinatario, $asunto, $body, $headers)) {
+    header('Location: ../Público/PaginaPrincipal.html');
 } else {
-  header('Location: ../Público/404.html');
+    header('Location: ../Público/404.html');
 }
-?>
