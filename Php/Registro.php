@@ -1,12 +1,10 @@
 <?php
-// 1. CONFIGURACIÓN
 $server   = "server.asralabs.com,14330";
 $database = "Proyecto_Progra3";
 $username = "sa";
 $password = "19861997.Sr";
 $dsn      = "Driver={ODBC Driver 17 for SQL Server};Server=$server;Database=$database;";
 
-// 2. CAPTURA Y SANITIZACIÓN DE DATOS
 $identificacion = trim($_POST['identificacion'] ?? '');
 $usuario        = trim($_POST['usuario'] ?? '');
 $password       = $_POST['password'] ?? '';
@@ -16,7 +14,6 @@ $apellido2      = trim($_POST['apellido2'] ?? '');
 $correo         = trim($_POST['correo'] ?? '');
 $telefono       = trim($_POST['telefono'] ?? '');
 
-// 3. VALIDACIONES BÁSICAS
 $errors = [];
 if (!preg_match('/^[0-9]{9,12}$/', $identificacion)) {
     $errors[] = "Identificación inválida.";
@@ -43,10 +40,8 @@ if (count($errors) > 0) {
     exit;
 }
 
-// 4. HASH DE CONTRASEÑA
 $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-// 5. CONEXIÓN ODBC Y PREPARACIÓN DE CONSULTA
 $conn = odbc_connect($dsn, $username, $password);
 if (!$conn) {
     die("<p style='color:red;'>Error de conexión: " . odbc_errormsg() . "</p>");
