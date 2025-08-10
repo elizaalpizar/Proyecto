@@ -15,7 +15,6 @@ main {
 label {
   display: block;
   margin-top: 1rem;
-  background-color: rgb(213, 157, 117);
 }
 
 input, textarea, select, button {
@@ -29,8 +28,8 @@ input, textarea, select, button {
 
 button {
   margin-top: 1.5rem;
-  background: #007acc;
-  color: #fff;
+  background: #000000;
+  color: #ffffff;
   border: none;
   cursor: pointer;
 }
