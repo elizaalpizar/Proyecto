@@ -1,28 +1,30 @@
 <?php
-$destinatario = 'eliza.alpizar2401@gmail.com';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-$nombre  = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
-$email   = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-$mensaje = trim($_POST['message']);
-$rating  = filter_input(INPUT_POST, 'rating', FILTER_VALIDATE_INT);
+require 'vendor/autoload.php'; // o ajusta si usas PHPMailer manual
 
-if (!$nombre || !$email || !$mensaje || !$rating) {
-    header('Location: ../Público/404.html');
-    exit;
+$mail = new PHPMailer(true);
+
+try {
+    $mail->isSMTP();
+    $mail->Host       = 'eliza.alpizar2401@gmail.com';
+    $mail->SMTPAuth   = true;
+    $mail->Username   = 'eliza.alpizar2401@gmail.com'; // tu cuenta Gmail
+    $mail->Password   = 'Bianka04072015*';   // usa contraseña de aplicación
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port       = 587;
+
+    $mail->setFrom('tu_correo@gmail.com', 'Formulario Atletas');
+    $mail->addAddress('eliza.alpizar2401@gmail.com'); 
+
+    // Contenido del correo
+    $mail->Subject = 'Nueva consulta desde el formulario';
+    $mail->Body    = "Nombre: {$_POST['name']}\nEmail: {$_POST['email']}\nMensaje:\n{$_POST['message']}\nValoración: {$_POST['rating']}";
+
+    $mail->send();
+    echo 'Consulta enviada correctamente.';
+} catch (Exception $e) {
+    echo "Error al enviar: {$mail->ErrorInfo}";
 }
-
-$asunto = 'Consulta desde Contáctenos';
-$body   = "Nombre: {$nombre}\n"
-        . "Email: {$email}\n"
-        . "Valoración: {$rating}\n\n"
-        . "Mensaje:\n{$mensaje}\n";
-
-$headers  = "From: no-reply@tu-dominio.com\r\n";
-$headers .= "Reply-To: {$email}\r\n";
-
-// 6. Envío
-if (mail($destinatario, $asunto, $body, $headers)) {
-    header('Location: ../Público/PaginaPrincipal.html');
-} else {
-    header('Location: ../Público/404.html');
-}
+?>
