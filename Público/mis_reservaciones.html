@@ -97,7 +97,7 @@
           <div>${r.duracion} h</div>
           <div><span class="badge ${r.estadoCalculado}">${r.estadoCalculado}</span></div>
           <div class="actions">
-            ${r.estadoCalculado === 'pendiente' ? `<form action="../Php/cancelar_reservacion.php" method="POST" onsubmit="return confirm('¿Cancelar esta reservación?');"><input type="hidden" name="id" value="${r.id}" /><button class="btn-cancel" type="submit">Cancelar</button></form>` : ''}
+            ${r.estadoCalculado === 'pendiente' ? `<form action="../Php/cancelar_reservacion.php" method="POST" onsubmit="return confirm('¿Esta seguro que quiere cancelar esta reservación?');"><input type="hidden" name="id" value="${r.id}" /><button class="btn-cancel" type="submit">Cancelar</button></form>` : ''}
           </div>
         `;
         cont.appendChild(row);
