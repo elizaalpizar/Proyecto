@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../Css/SeleccionTipoUsuario.css">
+  <title>Selección de Tipo de Usuario - Energym</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <h1>Energym</h1>
+      <ul>
+        <li><a href="PaginaPrincipal.html">Inicio</a></li>
+        <li><a href="PagAcercaDe.html">Acerca de</a></li>
+        <li><a href="Contactenos.html">Contáctenos</a></li>
+        <li><a href="SeleccionTipoUsuario.html" class="active">Iniciar Sesión</a></li>
+        <li><a href="Servicios.html">Servicio</a></li>
+        <li><a href="Mapa.html">Mapa</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="selection-card">
+      <div class="header">
+        <h2>Bienvenido de nuevo</h2>
+        <p>Selecciona tu tipo de cuenta para continuar</p>
+      </div>
+
+      <div class="options">
+        <div class="option-card" onclick="seleccionarTipo('atleta')">
+          <div class="icon">
+            <i class="fas fa-dumbbell"></i>
+          </div>
+          <h3>Atleta</h3>
+          <p>Accede a tu cuenta de atleta para reservar espacios de entrenamiento y gestionar tu perfil</p>
+          <div class="arrow">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </div>
+
+        <div class="option-card" onclick="seleccionarTipo('admin')">
+          <div class="icon">
+            <i class="fas fa-user-shield"></i>
+          </div>
+          <h3>Administrador</h3>
+          <p>Accede al panel de administración para gestionar usuarios, reservaciones y configuraciones</p>
+          <div class="arrow">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>¿Aún no tienes una cuenta?</p>
+        <a href="RegistroAtleta.html" class="join-link">Registrarse como Atleta</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function seleccionarTipo(tipo) {
+      if (tipo === 'atleta') {
+        window.location.href = 'InicioSesion.html';
+      } else if (tipo === 'admin') {
+        window.location.href = '../Admin/InicioSesionAdmin.html';
+      }
+    }
+
+    // Agregar efectos hover
+    document.querySelectorAll('.option-card').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-5px)';
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+      });
+    });
+  </script>
+</body>
+
+</html>

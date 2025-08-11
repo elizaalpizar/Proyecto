@@ -43,17 +43,14 @@ if (count($errors) > 0) {
     exit;
 }
 
-// Hash de contraseña
 $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-// Conexión a la base de datos
 $conn = odbc_connect($connectionString, '', '');
 if (!$conn) {
     $errorMsg = odbc_errormsg();
     die("<p style='color:red;'>Error de conexión: $errorMsg</p>");
 }
 
-// Insertar registro
 $sql = "INSERT INTO atletas (identificacion, usuario, contrasena, nombre, apellido1, apellido2, correo, telefono) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = odbc_prepare($conn, $sql);

@@ -1,95 +1,130 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../Css/paginaPrincipal.css">
-  <title>Página Principal</title>
+  <title>Energym - Tu Gimnasio de Confianza</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
-
+</head>
+<body>
   <header>
     <nav class="navbar">
       <h1>Energym</h1>
       <ul>
-        <li><a href="PagAcercaDe.html" target="_blank">Acerca de</a></li>
-        <li><a href="Contactenos.html" target="_blank">Contáctenos</a></li>
-        <li><a href="InicioSesion.html" target="_blank">Iniciar Sesión</a></li>
-        <li><a href="Servicios.html" target="_blank">Servicio</a></li>
-        <li><a href="RegistroAtleta.html" target="_blank">Registro Atleta</a></li>
-        <li><a href="Mapa.html" target="_blank">Mapa</a></li>
+                    <li><a href="PagAcercaDe.html">Acerca de</a></li>
+            <li><a href="Contactenos.html">Contáctenos</a></li>
+            <li><a href="SeleccionTipoUsuario.html">Iniciar Sesión</a></li>
+            <li><a href="Servicios.html">Servicio</a></li>
+            <li><a href="Mapa.html">Mapa</a></li>
       </ul>
     </nav>
   </header>
-  <section class="zonas">
-    <h2>Zonas de Entrenamiento</h2>
-    <div class="zona-botones">
-      <button onclick="mostrarZona('mancuernas')">Zona de Mancuernas</button>
-      <button onclick="mostrarZona('cardio')">Zona de Cardio</button>
-      <button onclick="mostrarZona('funcional')">Zona Funcional</button>
+
+  <main class="container">
+    <section class="hero-section">
+      <div class="hero-content">
+        <h2>Bienvenido a Energym</h2>
+        <p>Tu destino para alcanzar tus metas fitness y transformar tu vida</p>
+        <div class="hero-buttons">
+          <a href="RegistroAtleta.html" class="btn-primary">
+            <i class="fas fa-user-plus"></i>
+            Registrarse
+          </a>
+          <a href="SeleccionTipoUsuario.html" class="btn-secondary">
+            <i class="fas fa-sign-in-alt"></i>
+            Iniciar Sesión
+          </a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="../Imagenes/images.jpg" alt="Gimnasio Energym">
+      </div>
+    </section>
+
+    <section class="features-section">
+      <h3>¿Por qué elegir Energym?</h3>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-dumbbell"></i>
+          </div>
+          <h4>Equipamiento Moderno</h4>
+          <p>Contamos con la última tecnología en equipos de fitness</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h4>Instructores Certificados</h4>
+          <p>Personal capacitado para guiarte en tu entrenamiento</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h4>Horarios Flexibles</h4>
+          <p>Abierto 24/7 para adaptarnos a tu rutina</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h4>Ambiente Familiar</h4>
+          <p>Un lugar donde te sentirás como en casa</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="services-preview">
+      <h3>Nuestros Servicios</h3>
+      <div class="services-grid">
+        <div class="service-card">
+          <img src="../Imagenes/Funcionales.jpg" alt="Entrenamiento Funcional">
+          <h4>Entrenamiento Funcional</h4>
+          <p>Mejora tu movilidad y fuerza con ejercicios funcionales</p>
+          <a href="Servicios.html" class="service-link">Ver más</a>
+        </div>
+        <div class="service-card">
+          <img src="../Imagenes/cardio.jpg" alt="Cardio">
+          <h4>Zona de Cardio</h4>
+          <p>Quema calorías y mejora tu resistencia cardiovascular</p>
+          <a href="Servicios.html" class="service-link">Ver más</a>
+        </div>
+        <div class="service-card">
+          <img src="../Imagenes/Mancuernas.jpg" alt="Pesas">
+          <h4>Área de Pesas</h4>
+          <p>Desarrolla tu fuerza muscular con equipos especializados</p>
+          <a href="Servicios.html" class="service-link">Ver más</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Energym</h4>
+        <p>Transformando vidas a través del fitness</p>
+      </div>
+      <div class="footer-section">
+        <h4>Contacto</h4>
+        <p><i class="fas fa-phone"></i> +123 456 7890</p>
+        <p><i class="fas fa-envelope"></i> info@energym.com</p>
+      </div>
+      <div class="footer-section">
+        <h4>Síguenos</h4>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
     </div>
-
-    <div class="zona-imagen" id="imagenZona">
-      <p>Haz clic en una zona para ver la imagen</p>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Energym. Todos los derechos reservados.</p>
     </div>
-  </section>
-  <script>
-    function mostrarZona(zona) {
-      const contenedor = document.getElementById('imagenZona');
-      let imagen = '';
-      let alt = '';
-
-      if (zona === 'mancuernas') {
-        imagen = '../Imagenes/Mancuernas.jpg';
-        alt = 'Zona de mancuernas';
-      } else if (zona === 'cardio') {
-        imagen = '../Imagenes/cardio.jpg';
-        alt = 'Zona de cardio';
-      } else if (zona === 'funcional') {
-        imagen = '../Imagenes/Funcionales.jpg';
-        alt = 'Zona funcional';
-      }
-
-      contenedor.innerHTML = `<img src="${imagen}" alt="${alt}"><p>${alt}</p>`;
-    }
-  </script>
-  <section class="info-general">
-    <h2>Bienvenido a Energym</h2>
-    <p>
-      Ofrecemos las mejores zonas de entrenamiento en Costa Rica con instructores certificados y espacios modernos,
-      ideales para tu rendimiento deportivo.
-    </p>
-  </section>
-
-  <section class="testimonios">
-    <h2>Lo que opinan nuestros atletas</h2>
-    <div class="testimonial">
-      <p>“Entrenar en Energym ha sido mi mejor decisión. Todo impecable y profesional.” – @Laura_SQ.</p>
-    </div>
-    <div class="testimonial">
-      <p>“Puedo reservar con anticipación y siempre tengo mi espacio listo.” – @DiegVaz981.</p>
-    </div>
-  </section>
-
-  <section class="redes-sociales">
-    <h2>Síguenos en redes sociales</h2>
-    <div class="redes-sociales-icons">
-      <a href="https://www.facebook.com/energymcr" target="_blank" aria-label="Facebook Energym" class="facebook">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-      <a href="https://www.instagram.com/energym_cr" target="_blank" aria-label="Instagram Energym" class="instagram">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a href="https://www.tiktok.com/@energymcr" target="_blank" aria-label="TikTok Energym" class="tiktok">
-        <i class="fab fa-tiktok"></i>
-      </a>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Energym Costa Rica. Todos los derechos reservados.</p>
   </footer>
-
-  </body>
-
+</body>
 </html>

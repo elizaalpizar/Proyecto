@@ -1,60 +1,200 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contáctenos</title>
-  <link rel="stylesheet" href="../Css/Contactenos.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../Css/Contactenos.css">
+  <title>Contáctenos - Energym</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <main>
-    <h1>Contáctenos</h1>
-    <form id="contactForm" method="post" action="../Php/Contactenos.php" novalidate>
-      
-      <label for="name">Nombre completo</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+"
-        title="Solo letras y espacios"
-        required
-      />
-      <small class="error-message" id="nameError"></small>
-      
-      <label for="email">Correo electrónico</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        placeholder="tucorreo@dominio.com"
-        required
-      />
-      <small class="error-message" id="emailError"></small>
-      
-      <label for="message">Consulta / Comentarios</label>
-      <textarea id="message" name="message" rows="6" required></textarea>
-      <small class="error-message" id="messageError"></small>
-      
-      <label for="rating">Evalúa tu experiencia</label>
-      <select id="rating" name="rating" required>
-        <option value="">-- Selecciona una opción --</option>
-        <option value="1">1 – Muy deficiente</option>
-        <option value="2">2 – Deficiente</option>
-        <option value="3">3 – Aceptable</option>
-        <option value="4">4 – Buena</option>
-        <option value="5">5 – Excelente</option>
-      </select>
-      <small class="error-message" id="ratingError"></small>
-      
-      <button type="submit">Enviar</button>
-    </form>
+  <header>
+    <nav class="navbar">
+      <h1>Energym</h1>
+      <ul>
+        <li><a href="PaginaPrincipal.html">Inicio</a></li>
+        <li><a href="PagAcercaDe.html">Acerca de</a></li>
+        <li><a href="Contactenos.html" class="active">Contáctenos</a></li>
+        <li><a href="SeleccionTipoUsuario.html">Iniciar Sesión</a></li>
+        <li><a href="Servicios.html">Servicio</a></li>
+        <li><a href="Mapa.html">Mapa</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero-section">
+      <div class="hero-content">
+        <h2>Contáctanos</h2>
+        <p>Estamos aquí para ayudarte. Envíanos un mensaje y te responderemos lo antes posible.</p>
+      </div>
+    </section>
+
+    <section class="contact-section">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>Información de Contacto</h3>
+          <div class="info-items">
+            <div class="info-item">
+              <div class="info-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div class="info-content">
+                <h4>Dirección</h4>
+                <p>San José, Costa Rica<br>Zona Central</p>
+              </div>
+            </div>
+            
+            <div class="info-item">
+              <div class="info-icon">
+                <i class="fas fa-phone"></i>
+              </div>
+              <div class="info-content">
+                <h4>Teléfono</h4>
+                <p>+506 1234 5678<br>+506 8765 4321</p>
+              </div>
+            </div>
+            
+            <div class="info-item">
+              <div class="info-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="info-content">
+                <h4>Email</h4>
+                <p>info@energym.com<br>soporte@energym.com</p>
+              </div>
+            </div>
+            
+            <div class="info-item">
+              <div class="info-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="info-content">
+                <h4>Horarios</h4>
+                <p>Lunes a Domingo<br>24/7</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="social-links">
+            <h4>Síguenos en redes sociales</h4>
+            <div class="social-icons">
+              <a href="#" class="social-icon facebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-icon instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="social-icon twitter">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="social-icon whatsapp">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <h3>Envíanos un mensaje</h3>
+          <form action="../Php/Contactenos.php" method="POST" class="form">
+            <div class="form-group">
+              <label for="nombre">
+                <i class="fas fa-user"></i>
+                Nombre completo
+              </label>
+              <input type="text" id="nombre" name="nombre" required placeholder="Ingresa tu nombre completo">
+            </div>
+            
+            <div class="form-group">
+              <label for="email">
+                <i class="fas fa-envelope"></i>
+                Email
+              </label>
+              <input type="email" id="email" name="email" required placeholder="Ingresa tu email">
+            </div>
+            
+            <div class="form-group">
+              <label for="telefono">
+                <i class="fas fa-phone"></i>
+                Teléfono
+              </label>
+              <input type="tel" id="telefono" name="telefono" placeholder="Ingresa tu teléfono (opcional)">
+            </div>
+            
+            <div class="form-group">
+              <label for="asunto">
+                <i class="fas fa-tag"></i>
+                Asunto
+              </label>
+              <select id="asunto" name="asunto" required>
+                <option value="">Selecciona un asunto</option>
+                <option value="Información general">Información general</option>
+                <option value="Membresías">Membresías</option>
+                <option value="Clases y horarios">Clases y horarios</option>
+                <option value="Problemas técnicos">Problemas técnicos</option>
+                <option value="Sugerencias">Sugerencias</option>
+                <option value="Otro">Otro</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="mensaje">
+                <i class="fas fa-comment"></i>
+                Mensaje
+              </label>
+              <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Escribe tu mensaje aquí..."></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">
+              <i class="fas fa-paper-plane"></i>
+              Enviar mensaje
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="map-section">
+      <h3>Ubicación</h3>
+      <div class="map-container">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3926.5!2d-84.0!3d9.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwNTQnMDAuMCJOIDg0wrAwMCcwMC4wIlc!5e0!3m2!1ses!2scr!4v1234567890"
+          width="100%" 
+          height="400" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </section>
   </main>
-  <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
-<script>
-  // Inicializa tu usuario (lo sacas del panel de EmailJS)
-  emailjs.init("TU_USER_ID");
-</script>
-  <script src="../JS/ValidaciónContactenos.js"></script>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Energym</h4>
+        <p>Transformando vidas a través del fitness</p>
+      </div>
+      <div class="footer-section">
+        <h4>Contacto</h4>
+        <p><i class="fas fa-phone"></i> +123 456 7890</p>
+        <p><i class="fas fa-envelope"></i> info@energym.com</p>
+      </div>
+      <div class="footer-section">
+        <h4>Síguenos</h4>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Energym. Todos los derechos reservados.</p>
+    </div>
+  </footer>
 </body>
 </html>

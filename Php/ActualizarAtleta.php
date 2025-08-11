@@ -2,7 +2,6 @@
 require_once 'Session.php';
 requireAtleta();
 
-// Recoger y validar POST
 $id        = $_POST['identificacion'] ?? '';
 $usuario   = trim($_POST['usuario'] ?? '');
 $password  = $_POST['password'] ?? '';
@@ -23,11 +22,9 @@ if ($errors) {
     exit;
 }
 
-// Conectar
 $conn = odbc_connect("Driver={ODBC Driver 17 for SQL Server};Server=server.asralabs.com,14330;Database=Proyecto_Progra3;UID=sa;PWD=19861997.Sr;CharacterSet=UTF8;", '', '') 
     or die('Error de conexión');
 
-// Preparar UPDATE dinámico
 $params   = [$usuario, $nombre, $apellido1, $apellido2, $correo, $telefono];
 $fieldSQL = "usuario = ?, nombre = ?, apellido1 = ?, apellido2 = ?, correo = ?, telefono = ?";
 

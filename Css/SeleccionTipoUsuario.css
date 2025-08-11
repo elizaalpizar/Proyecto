@@ -1,0 +1,226 @@
+/* Estilos generales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #333;
+}
+
+/* Navegación */
+.navbar {
+  background: rgba(255, 255, 255, 0.95);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar h1 {
+  color: #667eea;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  transition: color 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+}
+
+.navbar a:hover {
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.navbar a.active {
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.15);
+}
+
+/* Contenedor principal */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 120px);
+  padding: 2rem;
+}
+
+/* Tarjeta de selección */
+.selection-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  padding: 3rem;
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+}
+
+.header h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.header p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 3rem;
+}
+
+/* Opciones */
+.options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.option-card {
+  background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
+  border: 2px solid transparent;
+  border-radius: 15px;
+  padding: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.option-card:hover {
+  border-color: #667eea;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+  transform: translateY(-5px);
+}
+
+.option-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.option-card:hover::before {
+  transform: scaleX(1);
+}
+
+.icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  color: white;
+  font-size: 2rem;
+}
+
+.option-card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.option-card p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.arrow {
+  color: #667eea;
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.option-card:hover .arrow {
+  transform: translateX(5px);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid #eee;
+  padding-top: 2rem;
+}
+
+.footer p {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.join-link {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.join-link:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar ul {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .selection-card {
+    padding: 2rem;
+    margin: 1rem;
+  }
+  
+  .options {
+    grid-template-columns: 1fr;
+  }
+  
+  .header h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .selection-card {
+    padding: 1.5rem;
+  }
+  
+  .option-card {
+    padding: 1.5rem;
+  }
+}
