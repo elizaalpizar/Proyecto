@@ -6,6 +6,11 @@
   <title>Registro de Atleta - Energym Costa Rica</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../Css/Registro.css">
+  <style>
+    .mensaje { margin: 12px auto; max-width: 450px; padding: 12px 16px; border-radius: 10px; font-weight: 600; }
+    .mensaje.error { background: #fde8e8; color: #b91c1c; }
+    .mensaje.success { background: #e6fffa; color: #065f46; }
+  </style>
 </head>
 <body>
   <header>
@@ -24,8 +29,10 @@
 
   <main>
     <h2>Registro de Atleta</h2>
+
+    <div id="msg" class="mensaje" style="display:none;"></div>
+
     <form id="formRegistro" action="../Php/Registro.php" method="POST" novalidate>
-      
       <label for="identificacion">Identificación (única)</label>
       <input type="text" id="identificacion" name="identificacion" required pattern="[0-9]{9,12}" placeholder="Ej: 123456789" />
 
@@ -60,6 +67,18 @@
     <p>&copy; 2025 Energym Costa Rica. Todos los derechos reservados.</p>
   </footer>
   <script src="../JS/ValidaciónRegistro.js"></script>
-
+  <script>
+    // Mostrar mensajes por query params
+    const p = new URLSearchParams(window.location.search);
+    const msg = p.get('mensaje');
+    const tipo = p.get('tipo');
+    if (msg) {
+      const c = document.getElementById('msg');
+      c.className = 'mensaje ' + (tipo || 'error');
+      c.textContent = msg;
+      c.style.display = 'block';
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  </script>
 </body>
 </html>

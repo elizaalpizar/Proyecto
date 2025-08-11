@@ -1,84 +1,86 @@
 <?php
 session_start();
+require_once 'conexion.php';
 
-// Verificar si el usuario está autenticado
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header("Location: ../Público/InicioSesion.html");
-    exit();
+// Requiere usuario logueado
+if (!isset($_SESSION['logueado']) || $_SESSION['logueado'] !== true) {
+  header('Location: ../Público/InicioSesion.html');
+  exit();
 }
 
-// Verificar si se envió el formulario
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header("Location: ../Privado/Reservacion.html");
-    exit();
+  header('Location: ../Público/nueva_reservacion.html');
+  exit();
 }
 
-// Configuración de conexión a SQL Server
-$server = "server.asralabs.com,14330";
-$database = "Proyecto_Progra3";
-$username = "sa";
-$password = "19861997.Sr";
+// Datos
+$idAtleta = $_SESSION['atleta_id'];
+$servicio = limpiarDatos($_POST['servicio'] ?? '');
+$fecha = $_POST['fecha'] ?? '';
+$hora = $_POST['hora'] ?? '';
+$duracion = $_POST['duracion'] ?? '';
+$comentarios = limpiarDatos($_POST['comentarios'] ?? '');
+$fechaCreacion = date('Y-m-d H:i:s');
 
-$connectionString = "Driver={ODBC Driver 17 for SQL Server};Server=$server;Database=$database;";
-$conn = odbc_connect($connectionString, $username, $password);
+$mensaje = '';
+$tipo = 'success';
 
-if (!$conn) {
-    die("Error de conexión: " . odbc_errormsg());
+// Normalizar formatos para SQL Server
+$fechaSQL = $fecha ? date('Y-m-d', strtotime($fecha)) : '';
+$horaSQL = $hora ? date('H:i:s', strtotime($hora)) : '';
+$duracionNum = is_numeric(str_replace(',', '.', $duracion)) ? (float)str_replace(',', '.', $duracion) : null;
+
+// Validaciones
+$errores = [];
+if (!$servicio) $errores[] = 'Seleccione un servicio';
+if (!$fechaSQL) $errores[] = 'Seleccione una fecha válida';
+if (!$horaSQL) $errores[] = 'Seleccione una hora válida';
+if ($duracionNum === null) $errores[] = 'Seleccione una duración válida';
+
+// Fecha no pasada
+if ($fechaSQL && strtotime($fechaSQL) < strtotime(date('Y-m-d'))) {
+  $errores[] = 'No se puede reservar en el pasado';
 }
 
-// Obtener datos del formulario
-$id_atleta = $_SESSION['user_id'];
-$servicio = $_POST['servicio'];
-$fecha = $_POST['fecha'];
-$hora = $_POST['hora'];
-$duracion = $_POST['duracion'];
-$comentarios = isset($_POST['comentarios']) ? $_POST['comentarios'] : '';
-$fecha_creacion = date('Y-m-d H:i:s');
-
-// Validar que la fecha no sea anterior a hoy
-if (strtotime($fecha) < strtotime(date('Y-m-d'))) {
-    echo "<script>
-        alert('No se puede reservar para fechas pasadas.');
-        window.location.href = '../Privado/Reservacion.php';
-    </script>";
-    exit();
+if (count($errores) > 0) {
+  $mensaje = implode('. ', $errores);
+  $tipo = 'error';
+  $url = '../Público/nueva_reservacion.html?mensaje=' . urlencode($mensaje) . '&tipo=' . urlencode($tipo);
+  header('Location: ' . $url);
+  exit();
 }
 
-// Verificar si ya existe una reservación para esa fecha y hora
-$sql_check = "SELECT * FROM reservaciones WHERE fecha = ? AND hora = ? AND servicio = ?";
-$stmt_check = odbc_prepare($conn, $sql_check);
-odbc_execute($stmt_check, array($fecha, $hora, $servicio));
-
-if (odbc_fetch_array($stmt_check)) {
-    echo "<script>
-        alert('Ya existe una reservación para esa fecha, hora y servicio. Por favor, seleccione otro horario.');
-        window.location.href = '../Privado/Reservacion.php';
-    </script>";
-    exit();
+// Evitar solape exacto en mismo servicio
+$sqlCheck = "SELECT 1 FROM reservaciones WHERE fecha = ? AND hora = ? AND servicio = ?";
+$stmtCheck = odbc_prepare($conn, $sqlCheck);
+odbc_execute($stmtCheck, [$fechaSQL, $horaSQL, $servicio]);
+if (odbc_fetch_row($stmtCheck)) {
+  odbc_free_result($stmtCheck);
+  $mensaje = 'Ya existe una reservación para ese servicio, fecha y hora.';
+  $tipo = 'error';
+  $url = '../Público/nueva_reservacion.html?mensaje=' . urlencode($mensaje) . '&tipo=' . urlencode($tipo);
+  header('Location: ' . $url);
+  exit();
 }
+odbc_free_result($stmtCheck);
 
-// Insertar la reservación
-$sql_insert = "INSERT INTO reservaciones (id_atleta, servicio, fecha, hora, duracion, comentarios, fecha_creacion, estado) 
-               VALUES (?, ?, ?, ?, ?, ?, ?, 'activa')";
+// Insertar
+$sqlInsert = "INSERT INTO reservaciones (id_atleta, servicio, fecha, hora, duracion, comentarios, fecha_creacion, estado) VALUES (?, ?, ?, ?, ?, ?, ?, 'activa')";
+$stmtInsert = odbc_prepare($conn, $sqlInsert);
 
-$stmt_insert = odbc_prepare($conn, $sql_insert);
-if (!$stmt_insert) {
-    die("Error en la preparación de la consulta: " . odbc_errormsg());
-}
-
-$result = odbc_execute($stmt_insert, array($id_atleta, $servicio, $fecha, $hora, $duracion, $comentarios, $fecha_creacion));
+$result = odbc_execute($stmtInsert, [$idAtleta, $servicio, $fechaSQL, $horaSQL, $duracionNum, $comentarios, $fechaCreacion]);
 
 if ($result) {
-    echo "<script>
-        alert('¡Reservación realizada con éxito!');
-        window.location.href = '../Privado/Reservacion.php';
-    </script>";
+  $mensaje = '¡Reservación realizada con éxito!';
+  $tipo = 'success';
 } else {
-    echo "<script>
-        alert('Error al procesar la reservación: " . odbc_errormsg() . "');
-        window.location.href = '../Privado/Reservacion.php';
-    </script>";
+  $mensaje = 'Error al procesar la reservación: ' . odbc_errormsg();
+  $tipo = 'error';
 }
 
-odbc_close($conn);
+odbc_free_result($stmtInsert);
+cerrarConexion($conn);
+
+header('Location: ' . '../Público/nueva_reservacion.html?mensaje=' . urlencode($mensaje) . '&tipo=' . urlencode($tipo));
+exit();
 ?>

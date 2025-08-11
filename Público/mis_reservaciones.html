@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mis Reservaciones - Energym</title>
+  <link rel="stylesheet" href="../Css/dashboard_atleta.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    .list-card { background: rgba(255,255,255,0.95); border-radius: 16px; padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); max-width: 1100px; margin: 24px auto; }
+    .res-row { display: grid; grid-template-columns: 1fr 120px 120px 120px 140px 140px; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; }
+    .res-head { font-weight: 800; color: #4f46e5; }
+    .badge { padding: 6px 10px; border-radius: 999px; font-weight: 700; font-size: 12px; display: inline-block; text-align: center; }
+    .badge.pendiente { background: #eef2ff; color: #4338ca; }
+    .badge.realizada { background: #ecfeff; color: #155e75; }
+    .badge.cancelada { background: #fee2e2; color: #991b1b; }
+    .actions { display: flex; gap: 8px; }
+    .btn-cancel { background: #fee2e2; color: #991b1b; border: none; padding: 8px 12px; border-radius: 10px; cursor: pointer; font-weight: 700; }
+    .mensaje { margin: 12px auto; max-width: 1100px; padding: 12px 16px; border-radius: 10px; font-weight: 600; }
+    .mensaje.error { background: #fde8e8; color: #b91c1c; }
+    .mensaje.success { background: #e6fffa; color: #065f46; }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <h1>Energym</h1>
+      <ul>
+        <li><a href="dashboard_atleta.html">Dashboard</a></li>
+        <li><a href="nueva_reservacion.html">Nueva Reservación</a></li>
+        <li><a href="mi_perfil.html">Mi Perfil</a></li>
+        <li><a href="../Php/logout.php" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="welcome-section">
+      <h1>Mis Reservaciones</h1>
+      <p>Consulta y gestiona tus reservaciones</p>
+    </div>
+
+    <div id="msg" class="mensaje" style="display:none;"></div>
+
+    <div class="list-card">
+      <div class="res-row res-head">
+        <div>Servicio</div>
+        <div>Fecha</div>
+        <div>Hora</div>
+        <div>Duración</div>
+        <div>Estado</div>
+        <div>Acciones</div>
+      </div>
+      <div id="lista"></div>
+    </div>
+
+    <a class="btn-secondary" href="dashboard_atleta.html"><i class="fas fa-arrow-left"></i> Volver</a>
+  </div>
+
+  <script>
+    // Mostrar mensajes por query params
+    const params = new URLSearchParams(window.location.search);
+    const mensaje = params.get('mensaje');
+    const tipo = params.get('tipo');
+    if (mensaje) {
+      const m = document.getElementById('msg');
+      m.className = 'mensaje ' + (tipo || 'success');
+      m.textContent = mensaje;
+      m.style.display = 'block';
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
+    // Cargar lista
+    fetch('../Php/listar_reservaciones.php')
+      .then(r => r.json())
+      .then(data => render(data))
+      .catch(() => {
+        const m = document.getElementById('msg');
+        m.className = 'mensaje error';
+        m.textContent = 'No se pudieron cargar las reservaciones';
+        m.style.display = 'block';
+      });
+
+    function render(items) {
+      const cont = document.getElementById('lista');
+      cont.innerHTML = '';
+      if (!items || items.length === 0) {
+        cont.innerHTML = '<p>No tienes reservaciones.</p>';
+        return;
+      }
+      items.forEach(r => {
+        const row = document.createElement('div');
+        row.className = 'res-row';
+        row.innerHTML = `
+          <div>${r.servicio}</div>
+          <div>${r.fecha}</div>
+          <div>${r.hora}</div>
+          <div>${r.duracion} h</div>
+          <div><span class="badge ${r.estadoCalculado}">${r.estadoCalculado}</span></div>
+          <div class="actions">
+            ${r.estadoCalculado === 'pendiente' ? `<form action="../Php/cancelar_reservacion.php" method="POST" onsubmit="return confirm('¿Cancelar esta reservación?');"><input type="hidden" name="id" value="${r.id}" /><button class="btn-cancel" type="submit">Cancelar</button></form>` : ''}
+          </div>
+        `;
+        cont.appendChild(row);
+      });
+    }
+  </script>
+</body>
+</html>

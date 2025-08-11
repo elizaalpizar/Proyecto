@@ -3,98 +3,96 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo de Zonas Deportivas - Energym</title>
+  <title>Catálogo de Servicios (Zonas Deportivas) - Admin</title>
   <link rel="stylesheet" href="../Css/Catalogo_Menu.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .container { max-width: 1100px; margin: 24px auto; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+    .row { display: grid; grid-template-columns: 1fr 1fr 120px; gap: 10px; }
+    .row input { padding: 10px; border: 1px solid #e5e7eb; border-radius: 10px; }
+    .btn { padding: 10px 14px; border-radius: 10px; border: none; font-weight: 700; cursor: pointer; }
+    .btn-primary { background: #4f46e5; color: #fff; }
+    .btn-danger { background: #dc2626; color: #fff; }
+    table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    th, td { text-align: left; padding: 10px; border-bottom: 1px solid #eee; }
+    .actions { display: flex; gap: 8px; }
+    .topbar { display:flex; justify-content: space-between; align-items:center; margin-bottom:16px; }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <div class="topbar">
+      <h2>Catálogo de Servicios</h2>
+      <a href="../Php/logoutAdmin.php" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+    </div>
 
-  <h1>Catálogo de Zonas Deportivas - Energym</h1>
+    <div class="row">
+      <input id="codigo" placeholder="Código (único)" />
+      <input id="nombre" placeholder="Nombre del servicio" />
+      <input id="costo" placeholder="Costo (opcional)" />
+      <button id="guardar" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
+    </div>
 
-  <form id="zonaForm">
-    <input type="hidden" id="zonaId">
-    <label for="nombre">Nombre de la Zona:</label>
-    <input type="text" id="nombre" required>
-    
-    <label for="descripcion">Descripción:</label>
-    <textarea id="descripcion" required></textarea>
-    
-    <button type="submit">Guardar</button>
-  </form>
-
-  <h2>Listado de Zonas Deportivas</h2>
-  <table id="zonasTable">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Descripción</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
+    <table>
+      <thead>
+        <tr><th>Código</th><th>Nombre</th><th>Costo</th><th>Acciones</th></tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
 
   <script>
-    let zonas = [];
-    let contadorId = 1;
+    // Protección simple: si endpoints retornan 401, redirigir al login admin
+    function checkAuth(res) { if (res.status === 401) { window.location.href = 'InicioSesionAdmin.html'; return null; } return res; }
 
-    const zonaForm = document.getElementById("zonaForm");
-    const zonaId = document.getElementById("zonaId");
-    const nombre = document.getElementById("nombre");
-    const descripcion = document.getElementById("descripcion");
-    const zonasTable = document.querySelector("#zonasTable tbody");
-
-    zonaForm.addEventListener("submit", function(e) {
-      e.preventDefault();
-
-      if (zonaId.value) {
-        const id = parseInt(zonaId.value);
-        const zona = zonas.find(z => z.id === id);
-        zona.nombre = nombre.value;
-        zona.descripcion = descripcion.value;
-        zonaId.value = "";
-      } else {
-        zonas.push({
-          id: contadorId++,
-          nombre: nombre.value,
-          descripcion: descripcion.value
-        });
-      }
-
-      zonaForm.reset();
-      renderZonas();
-    });
-
-    function renderZonas() {
-      zonasTable.innerHTML = "";
-      zonas.forEach(zona => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${zona.id}</td>
-          <td>${zona.nombre}</td>
-          <td>${zona.descripcion}</td>
-          <td>
-            <button onclick="editarZona(${zona.id})">Editar</button>
-            <button onclick="eliminarZona(${zona.id})">Eliminar</button>
-          </td>
-        `;
-        zonasTable.appendChild(row);
+    async function cargar() {
+      const res = await fetch('../Php/admin_servicios_listar.php').then(checkAuth);
+      if (!res) return;
+      const data = await res.json();
+      const tbody = document.getElementById('tbody');
+      tbody.innerHTML = '';
+      data.forEach(s => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${s.codigo}</td><td>${s.nombre}</td><td>${s.costo ?? ''}</td>
+        <td class="actions">
+          <button class="btn btn-primary" onclick="editar('${s.codigo}', '${s.nombre.replace(/'/g, "&#39;")}', '${s.costo ?? ''}')"><i class='fas fa-edit'></i> Editar</button>
+          <button class="btn btn-danger" onclick="eliminarServicio('${s.codigo}')"><i class='fas fa-trash'></i> Eliminar</button>
+        </td>`;
+        tbody.appendChild(tr);
       });
     }
 
-    window.editarZona = function(id) {
-      const zona = zonas.find(z => z.id === id);
-      zonaId.value = zona.id;
-      nombre.value = zona.nombre;
-      descripcion.value = zona.descripcion;
-    };
+    async function guardar() {
+      const fd = new FormData();
+      fd.append('codigo', document.getElementById('codigo').value.trim());
+      fd.append('nombre', document.getElementById('nombre').value.trim());
+      fd.append('costo', document.getElementById('costo').value.trim());
+      const res = await fetch('../Php/admin_servicios_guardar.php', { method: 'POST', body: fd });
+      if (res.status === 401) { window.location.href = 'InicioSesionAdmin.html'; return; }
+      if (!res.ok) { alert(await res.text()); return; }
+      document.getElementById('codigo').value='';
+      document.getElementById('nombre').value='';
+      document.getElementById('costo').value='';
+      await cargar();
+    }
 
-    window.eliminarZona = function(id) {
-      zonas = zonas.filter(z => z.id !== id);
-      renderZonas();
-    };
+    async function eliminarServicio(codigo) {
+      if (!confirm('¿Eliminar servicio ' + codigo + '?')) return;
+      const fd = new FormData(); fd.append('codigo', codigo);
+      const res = await fetch('../Php/admin_servicios_eliminar.php', { method:'POST', body: fd });
+      if (res.status === 401) { window.location.href = 'InicioSesionAdmin.html'; return; }
+      if (!res.ok) { alert(await res.text()); return; }
+      await cargar();
+    }
+
+    function editar(codigo, nombre, costo) {
+      document.getElementById('codigo').value = codigo;
+      document.getElementById('nombre').value = nombre;
+      document.getElementById('costo').value = costo ?? '';
+    }
+
+    document.getElementById('guardar').addEventListener('click', guardar);
+    cargar();
   </script>
-
 </body>
 </html>

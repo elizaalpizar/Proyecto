@@ -1,80 +1,66 @@
 <?php
-header('Content-Type: text/html; charset=UTF-8');
-$server   = "server.asralabs.com,14330";
-$database = "Proyecto_Progra3";
-$username = "sa";
-$password = "19861997.Sr";
-$connectionString = "Driver={ODBC Driver 17 for SQL Server};Server=$server;Database=$database;UID=$username;PWD=$password;CharacterSet=UTF8;";
+session_start();
+require_once 'conexion.php';
 
-// Procesar variables POST
-$identificacion = trim($_POST['identificacion'] ?? '');
-$usuario        = trim($_POST['usuario'] ?? '');
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+  header('Location: ../Público/RegistroAtleta.html');
+  exit();
+}
+
+function resp($msg, $tipo = 'error') {
+  header('Location: ../Público/RegistroAtleta.html?mensaje=' . urlencode($msg) . '&tipo=' . urlencode($tipo));
+  exit();
+}
+
+$identificacion = limpiarDatos($_POST['identificacion'] ?? '');
+$usuario        = limpiarDatos($_POST['usuario'] ?? '');
 $password       = $_POST['password'] ?? '';
-$nombre         = trim($_POST['nombre'] ?? '');
-$apellido1      = trim($_POST['apellido1'] ?? '');
-$apellido2      = trim($_POST['apellido2'] ?? '');
-$correo         = trim($_POST['correo'] ?? '');
-$telefono       = trim($_POST['telefono'] ?? '');
+$nombre         = limpiarDatos($_POST['nombre'] ?? '');
+$apellido1      = limpiarDatos($_POST['apellido1'] ?? '');
+$apellido2      = limpiarDatos($_POST['apellido2'] ?? '');
+$correo         = limpiarDatos($_POST['correo'] ?? '');
+$telefono       = limpiarDatos($_POST['telefono'] ?? '');
 
-// Validaciones
-$errors = [];
-if (!preg_match('/^[0-9]{9,12}$/', $identificacion)) {
-    $errors[] = "Identificación inválida.";
-}
-if (strlen($usuario) < 4) {
-    $errors[] = "El usuario debe tener al menos 4 caracteres.";
-}
-if (strlen($password) < 6) {
-    $errors[] = "La contraseña debe tener al menos 6 caracteres.";
-}
-if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-    $errors[] = "Correo electrónico inválido.";
-}
-if (!preg_match('/^[0-9]{8}$/', $telefono)) {
-    $errors[] = "Teléfono inválido.";
+// Validaciones mínimas del lado servidor
+$errores = [];
+if (!preg_match('/^\d{9,12}$/', $identificacion)) $errores[] = 'Identificación inválida';
+if (strlen($usuario) < 4) $errores[] = 'Usuario muy corto';
+if (strlen($password) < 6) $errores[] = 'Contraseña muy corta';
+if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) $errores[] = 'Correo inválido';
+if (!preg_match('/^\d{8}$/', $telefono)) $errores[] = 'Teléfono inválido';
+if ($nombre === '' || $apellido1 === '' || $apellido2 === '') $errores[] = 'Complete nombre y apellidos';
+
+if ($errores) {
+  resp(implode('. ', $errores), 'error');
 }
 
-if (count($errors) > 0) {
-    echo "<div style='color:red;'><ul>";
-    foreach ($errors as $e) {
-        echo "<li>$e</li>";
-    }
-    echo "</ul></div>";
-    exit;
+// Verificar duplicados (identificación y usuario)
+$chk = odbc_prepare($conn, 'SELECT identificacion, usuario FROM atletas WHERE identificacion = ? OR usuario = ?');
+odbc_execute($chk, [$identificacion, $usuario]);
+$dupId = false; $dupUser = false;
+while ($row = odbc_fetch_array($chk)) {
+  if (isset($row['identificacion']) && $row['identificacion'] == $identificacion) $dupId = true;
+  if (isset($row['usuario']) && strtolower($row['usuario']) === strtolower($usuario)) $dupUser = true;
 }
+odbc_free_result($chk);
 
-$passwordHash = password_hash($password, PASSWORD_DEFAULT);
+if ($dupId && $dupUser) resp('Ya existe un atleta con esa identificación y usuario.');
+if ($dupId) resp('Ya existe un atleta con esa identificación.');
+if ($dupUser) resp('El nombre de usuario ya está en uso.');
 
-$conn = odbc_connect($connectionString, '', '');
-if (!$conn) {
-    $errorMsg = odbc_errormsg();
-    die("<p style='color:red;'>Error de conexión: $errorMsg</p>");
-}
-
-$sql = "INSERT INTO atletas (identificacion, usuario, contrasena, nombre, apellido1, apellido2, correo, telefono) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
+// Insertar
+$hash = password_hash($password, PASSWORD_DEFAULT);
+$sql = 'INSERT INTO atletas (identificacion, usuario, contrasena, nombre, apellido1, apellido2, correo, telefono) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
 $stmt = odbc_prepare($conn, $sql);
-if (!$stmt) {
-    $errorMsg = odbc_errormsg($conn);
-    odbc_close($conn);
-    die("<p style='color:red;'>Error preparando consulta: $errorMsg</p>");
-}
-
-$params = [$identificacion, $usuario, $passwordHash, $nombre, $apellido1, $apellido2, $correo, $telefono];
-
-$ok = odbc_execute($stmt, $params);
+$ok = odbc_execute($stmt, [$identificacion, $usuario, $hash, $nombre, $apellido1, $apellido2, $correo, $telefono]);
 
 if ($ok) {
-    echo "<p style='color:green;'>¡Registro exitoso!</p>";
-    echo "<p><a href='../Público/InicioSesion.html'>Ir al inicio de sesión</a></p>";
-} else {
-    $error = odbc_errormsg($conn);
-    if (strpos($error, 'UNIQUE') !== false) {
-        echo "<p style='color:red;'>Ya existe un registro con esos datos.</p>";
-    } else {
-        echo "<p style='color:red;'>Error al registrar: $error</p>";
-    }
+  cerrarConexion($conn);
+  header('Location: ../Público/InicioSesion.html?mensaje=' . urlencode('Registro exitoso. Inicia sesión para continuar.') . '&tipo=success');
+  exit();
 }
 
-odbc_close($conn);
+$err = odbc_errormsg($conn);
+cerrarConexion($conn);
+resp('Error al registrar: ' . $err, 'error');
 ?>

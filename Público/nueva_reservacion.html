@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nueva Reservación - Energym</title>
+  <link rel="stylesheet" href="../Css/dashboard_atleta.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    .form-card { background: rgba(255,255,255,0.95); border-radius: 16px; padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); max-width: 900px; margin: 24px auto; }
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-weight: 600; color: #444; }
+    .form-group select, .form-group input, .form-group textarea { padding: 12px; border-radius: 10px; border: 1px solid #e2e8f0; font-size: 15px; }
+    .actions { display: flex; gap: 12px; margin-top: 16px; }
+    .btn-primary { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; border: none; padding: 12px 18px; border-radius: 12px; cursor: pointer; font-weight: 700; }
+    .btn-secondary { background: #e2e8f0; color: #333; text-decoration: none; padding: 12px 18px; border-radius: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; }
+    .mensaje { margin: 12px auto; max-width: 900px; padding: 12px 16px; border-radius: 10px; font-weight: 600; }
+    .mensaje.error { background: #fde8e8; color: #b91c1c; }
+    .mensaje.success { background: #e6fffa; color: #065f46; }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <h1>Energym</h1>
+      <ul>
+        <li><a href="PaginaPrincipal.html">Inicio</a></li>
+        <li><a href="PagAcercaDe.html">Acerca de</a></li>
+        <li><a href="Contactenos.html">Contáctenos</a></li>
+        <li><a href="Servicios.html">Servicio</a></li>
+        <li><a href="Mapa.html">Mapa</a></li>
+        <li><a href="mi_perfil.html" class="user-menu"><i class="fas fa-user"></i><span id="nombre-usuario">Atleta</span></a></li>
+        <li><a href="../Php/logout.php" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="welcome-section">
+      <h1>Nueva Reservación</h1>
+      <p>Selecciona un servicio, fecha y hora. No se permiten fechas pasadas.</p>
+    </div>
+
+    <div id="msg" class="mensaje" style="display:none;"></div>
+
+    <form id="formReservacion" class="form-card" action="../Php/procesar_reservacion.php" method="POST">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="servicio">Servicio</label>
+          <select id="servicio" name="servicio" required>
+            <option value="">Cargando servicios...</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="fecha">Fecha</label>
+          <input type="date" id="fecha" name="fecha" required />
+        </div>
+        <div class="form-group">
+          <label for="hora">Hora</label>
+          <input type="time" id="hora" name="hora" required />
+        </div>
+        <div class="form-group">
+          <label for="duracion">Duración (horas)</label>
+          <select id="duracion" name="duracion" required>
+            <option value="1">1</option>
+            <option value="1.5">1.5</option>
+            <option value="2">2</option>
+          </select>
+        </div>
+        <div class="form-group" style="grid-column: 1 / -1;">
+          <label for="comentarios">Comentarios</label>
+          <textarea id="comentarios" name="comentarios" rows="3" placeholder="Notas opcionales"></textarea>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn-primary" type="submit"><i class="fas fa-calendar-plus"></i> Crear Reservación</button>
+        <a class="btn-secondary" href="dashboard_atleta.html"><i class="fas fa-arrow-left"></i> Volver</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Cargar nombre del usuario
+    fetch('../Php/obtener_datos_usuario.php').then(r=>r.json()).then(u=>{
+      document.getElementById('nombre-usuario').textContent = u.nombre;
+    }).catch(()=>{});
+
+    // Llenar servicios desde BD
+    const params = new URLSearchParams(window.location.search);
+    const servicioQS = params.get('servicio');
+
+    fetch('../Php/listar_servicios.php')
+      .then(resp => resp.json())
+      .then(data => {
+        const sel = document.getElementById('servicio');
+        sel.innerHTML = '<option value="">Seleccione un servicio</option>';
+        data.forEach(s => {
+          const opt = document.createElement('option');
+          opt.value = s.codigo;
+          opt.textContent = s.nombre + (s.costo ? ` (₡${s.costo})` : '');
+          if (servicioQS && servicioQS === s.codigo) opt.selected = true;
+          sel.appendChild(opt);
+        });
+      })
+      .catch(() => {
+        const msg = document.getElementById('msg');
+        msg.className = 'mensaje error';
+        msg.textContent = 'No se pudieron cargar los servicios.';
+        msg.style.display = 'block';
+      });
+
+    // Validaciones básicas
+    const inputFecha = document.getElementById('fecha');
+    const hoy = new Date().toISOString().slice(0,10);
+    inputFecha.min = hoy;
+
+    // Mostrar mensaje por query params
+    const mensaje = params.get('mensaje');
+    const tipo = params.get('tipo');
+    if (mensaje) {
+      const msg = document.getElementById('msg');
+      msg.className = 'mensaje ' + (tipo || 'success');
+      msg.textContent = mensaje;
+      msg.style.display = 'block';
+      // limpiar la URL
+      window.history.replaceState({}, document.title, window.location.pathname + (servicioQS ? `?servicio=${encodeURIComponent(servicioQS)}` : ''));
+    }
+  </script>
+</body>
+</html>

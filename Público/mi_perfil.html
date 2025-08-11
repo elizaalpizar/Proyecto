@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../Css/mi_perfil.css">
+  <title>Mi Perfil - Energym</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <h1>Energym</h1>
+      <ul>
+        <li><a href="PaginaPrincipal.html">Inicio</a></li>
+        <li><a href="PagAcercaDe.html">Acerca de</a></li>
+        <li><a href="Contactenos.html">Contáctenos</a></li>
+        <li><a href="Servicios.html">Servicio</a></li>
+        <li><a href="Mapa.html">Mapa</a></li>
+        <li><a href="#" class="user-menu">
+          <i class="fas fa-user"></i>
+          <span id="nombre-usuario">Atleta</span>
+        </a></li>
+        <li><a href="../Php/logout.php" class="logout-btn">
+          <i class="fas fa-sign-out-alt"></i>
+          Cerrar Sesión
+        </a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <!-- Mensajes de éxito/error -->
+    <div id="mensaje-container" style="display: none;" class="mensaje-flotante">
+      <span id="mensaje-texto"></span>
+      <button onclick="ocultarMensaje()" class="cerrar-mensaje">&times;</button>
+    </div>
+    
+    <div class="profile-header">
+      <h1>Mi Perfil</h1>
+      <p>Gestiona tu información personal y credenciales</p>
+    </div>
+
+    <div class="profile-content">
+      <!-- Información actual del usuario -->
+      <div class="current-info">
+        <h2>Información Actual</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Identificación:</label>
+            <span id="identificacion-actual">-</span>
+          </div>
+          <div class="info-item">
+            <label>Usuario:</label>
+            <span id="usuario-actual">-</span>
+          </div>
+          <div class="info-item">
+            <label>Nombre:</label>
+            <span id="nombre-actual">-</span>
+          </div>
+          <div class="info-item">
+            <label>Primer Apellido:</label>
+            <span id="apellido1-actual">-</span>
+          </div>
+          <div class="info-item">
+            <label>Segundo Apellido:</label>
+            <span id="apellido2-actual">-</span>
+          </div>
+          <div class="info-item">
+            <label>Correo:</label>
+            <span id="correo-actual">-</span>
+          </div>
+          <div class="info-item">
+            <label>Teléfono:</label>
+            <span id="telefono-actual">-</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario de actualización -->
+      <div class="update-form">
+        <h2>Actualizar Información</h2>
+        <form id="updateProfileForm" action="../Php/actualizar_perfil.php" method="POST">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nombre">Nombre:</label>
+              <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+              <label for="apellido1">Primer Apellido:</label>
+              <input type="text" id="apellido1" name="apellido1" required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="apellido2">Segundo Apellido:</label>
+              <input type="text" id="apellido2" name="apellido2">
+            </div>
+            <div class="form-group">
+              <label for="correo">Correo Electrónico:</label>
+              <input type="email" id="correo" name="correo" required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="telefono">Teléfono:</label>
+              <input type="tel" id="telefono" name="telefono" required>
+            </div>
+            <div class="form-group">
+              <label for="nueva_contrasena">Nueva Contraseña (opcional):</label>
+              <input type="password" id="nueva_contrasena" name="nueva_contrasena" placeholder="Dejar vacío para mantener la actual">
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="submit" class="btn-update">
+              <i class="fas fa-save"></i>
+              Actualizar Perfil
+            </button>
+            <a href="dashboard_atleta.html" class="btn-cancel">
+              <i class="fas fa-arrow-left"></i>
+              Volver al Dashboard
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Función para mostrar mensajes
+    function mostrarMensaje(texto, tipo) {
+      const container = document.getElementById('mensaje-container');
+      const textoElement = document.getElementById('mensaje-texto');
+      
+      container.className = 'mensaje-flotante ' + tipo;
+      textoElement.textContent = texto;
+      container.style.display = 'block';
+      
+      // Ocultar automáticamente después de 5 segundos
+      setTimeout(ocultarMensaje, 5000);
+    }
+    
+    function ocultarMensaje() {
+      document.getElementById('mensaje-container').style.display = 'none';
+    }
+    
+    // Cargar información del usuario desde la sesión PHP
+    window.onload = function() {
+      // Obtener datos reales del usuario desde PHP
+      fetch('../Php/obtener_datos_usuario.php')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Error al obtener datos del usuario');
+          }
+          return response.json();
+        })
+        .then(usuario => {
+          // Actualizar información actual
+          document.getElementById('identificacion-actual').textContent = usuario.identificacion;
+          document.getElementById('usuario-actual').textContent = usuario.usuario;
+          document.getElementById('nombre-actual').textContent = usuario.nombre;
+          document.getElementById('apellido1-actual').textContent = usuario.apellido1;
+          document.getElementById('apellido2-actual').textContent = usuario.apellido2;
+          document.getElementById('correo-actual').textContent = usuario.correo;
+          document.getElementById('telefono-actual').textContent = usuario.telefono;
+
+          // Llenar formulario con datos actuales
+          document.getElementById('nombre').value = usuario.nombre;
+          document.getElementById('apellido1').value = usuario.apellido1;
+          document.getElementById('apellido2').value = usuario.apellido2;
+          document.getElementById('correo').value = usuario.correo;
+          document.getElementById('telefono').value = usuario.telefono;
+
+          // Actualizar nombre en la navegación
+          document.getElementById('nombre-usuario').textContent = usuario.nombre;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          // En caso de error, mostrar mensaje
+          alert('Error al cargar los datos del usuario. Por favor, recarga la página.');
+        });
+      
+      // Verificar si hay mensajes en la URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const mensaje = urlParams.get('mensaje');
+      const tipo = urlParams.get('tipo');
+      
+      if (mensaje && tipo) {
+        mostrarMensaje(mensaje, tipo);
+        // Limpiar la URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    };
+
+    // Validación del formulario
+    document.getElementById('updateProfileForm').addEventListener('submit', function(e) {
+      const nombre = document.getElementById('nombre').value.trim();
+      const apellido1 = document.getElementById('apellido1').value.trim();
+      const correo = document.getElementById('correo').value.trim();
+      const telefono = document.getElementById('telefono').value.trim();
+      
+      if (!nombre || !apellido1 || !correo || !telefono) {
+        e.preventDefault();
+        alert('Por favor, complete todos los campos obligatorios.');
+        return false;
+      }
+      
+      // Validar formato de correo
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(correo)) {
+        e.preventDefault();
+        alert('Por favor, ingrese un correo electrónico válido.');
+        return false;
+      }
+    });
+  </script>
+</body>
+</html>

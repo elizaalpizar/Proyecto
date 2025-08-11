@@ -7,6 +7,14 @@
   <title>Servicios - Energym</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    .filters { max-width: 1200px; margin: 0 auto 16px; display: flex; gap: 12px; align-items: center; }
+    .filters input { flex: 1; padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0; }
+    .reserve-btn { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; padding: 10px 14px; border-radius: 12px; text-decoration: none; font-weight: 700; }
+    .price { font-weight: 800; color: #4f46e5; }
+    .mensaje { max-width: 1200px; margin: 8px auto; padding: 12px 16px; border-radius: 10px; font-weight: 600; display:none; }
+    .mensaje.error { background: #fde8e8; color: #b91c1c; }
+  </style>
 </head>
 <body>
   <header>
@@ -16,7 +24,6 @@
         <li><a href="PaginaPrincipal.html">Inicio</a></li>
         <li><a href="PagAcercaDe.html">Acerca de</a></li>
         <li><a href="Contactenos.html">Contáctenos</a></li>
-        <li><a href="SeleccionTipoUsuario.html">Iniciar Sesión</a></li>
         <li><a href="Servicios.html" class="active">Servicio</a></li>
         <li><a href="Mapa.html">Mapa</a></li>
       </ul>
@@ -31,116 +38,14 @@
       </div>
     </section>
 
+    <div id="msg" class="mensaje error"></div>
+
+    <div class="filters">
+      <input id="buscador" type="text" placeholder="Buscar por nombre o código..." />
+    </div>
+
     <section class="services-section">
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-image">
-            <img src="../Imagenes/Funcionales.jpg" alt="Entrenamiento Funcional">
-          </div>
-          <div class="service-content">
-            <div class="service-icon">
-              <i class="fas fa-running"></i>
-            </div>
-            <h3>Entrenamiento Funcional</h3>
-            <p>Mejora tu movilidad, equilibrio y fuerza con ejercicios que simulan movimientos de la vida diaria. Perfecto para todos los niveles de condición física.</p>
-            <ul class="service-features">
-              <li><i class="fas fa-check"></i> Entrenamiento personalizado</li>
-              <li><i class="fas fa-check"></i> Grupos reducidos</li>
-              <li><i class="fas fa-check"></i> Horarios flexibles</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-image">
-            <img src="../Imagenes/cardio.jpg" alt="Zona de Cardio">
-          </div>
-          <div class="service-content">
-            <div class="service-icon">
-              <i class="fas fa-heartbeat"></i>
-            </div>
-            <h3>Zona de Cardio</h3>
-            <p>Equipos de última generación para mejorar tu resistencia cardiovascular. Desde principiantes hasta atletas avanzados.</p>
-            <ul class="service-features">
-              <li><i class="fas fa-check"></i> Treadmills profesionales</li>
-              <li><i class="fas fa-check"></i> Bicicletas estáticas</li>
-              <li><i class="fas fa-check"></i> Elípticas avanzadas</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-image">
-            <img src="../Imagenes/Mancuernas.jpg" alt="Área de Pesas">
-          </div>
-          <div class="service-content">
-            <div class="service-icon">
-              <i class="fas fa-dumbbell"></i>
-            </div>
-            <h3>Área de Pesas</h3>
-            <p>Desarrolla tu fuerza muscular con equipos especializados y mancuernas libres. Zona completamente equipada para todos los grupos musculares.</p>
-            <ul class="service-features">
-              <li><i class="fas fa-check"></i> Máquinas selectorizadas</li>
-              <li><i class="fas fa-check"></i> Pesas libres</li>
-              <li><i class="fas fa-check"></i> Bancos ajustables</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-image">
-            <img src="../Imagenes/Nutrición_Deportiva.jpg" alt="Nutrición Deportiva">
-          </div>
-          <div class="service-content">
-            <div class="service-icon">
-              <i class="fas fa-apple-alt"></i>
-            </div>
-            <h3>Nutrición Deportiva</h3>
-            <p>Asesoría nutricional personalizada para optimizar tu rendimiento deportivo y alcanzar tus objetivos de manera saludable.</p>
-            <ul class="service-features">
-              <li><i class="fas fa-check"></i> Planes personalizados</li>
-              <li><i class="fas fa-check"></i> Seguimiento continuo</li>
-              <li><i class="fas fa-check"></i> Suplementos certificados</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-image">
-            <img src="../Imagenes/Sauna_Recuperacion.jpg" alt="Sauna y Recuperación">
-          </div>
-          <div class="service-content">
-            <div class="service-icon">
-              <i class="fas fa-hot-tub"></i>
-            </div>
-            <h3>Sauna y Recuperación</h3>
-            <p>Zona de relajación y recuperación muscular con sauna seca y húmeda. Perfecta para después de tu entrenamiento.</p>
-            <ul class="service-features">
-              <li><i class="fas fa-check"></i> Sauna finlandesa</li>
-              <li><i class="fas fa-check"></i> Duchas de vapor</li>
-              <li><i class="fas fa-check"></i> Área de descanso</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-image">
-            <img src="../Imagenes/images2.jpg" alt="Clases Grupales">
-          </div>
-          <div class="service-content">
-            <div class="service-icon">
-              <i class="fas fa-users"></i>
-            </div>
-            <h3>Clases Grupales</h3>
-            <p>Participa en nuestras clases dirigidas por instructores certificados. Desde yoga hasta HIIT, tenemos algo para todos.</p>
-            <ul class="service-features">
-              <li><i class="fas fa-check"></i> Yoga y pilates</li>
-              <li><i class="fas fa-check"></i> Spinning</li>
-              <li><i class="fas fa-check"></i> Zumba y baile</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <div id="grid" class="services-grid"></div>
     </section>
 
     <section class="cta-section">
@@ -148,14 +53,8 @@
         <h3>¿Listo para comenzar?</h3>
         <p>Únete a Energym y transforma tu vida fitness</p>
         <div class="cta-buttons">
-          <a href="RegistroAtleta.html" class="btn-primary">
-            <i class="fas fa-user-plus"></i>
-            Registrarse
-          </a>
-          <a href="SeleccionTipoUsuario.html" class="btn-secondary">
-            <i class="fas fa-sign-in-alt"></i>
-            Iniciar Sesión
-          </a>
+          <a href="RegistroAtleta.html" class="btn-primary"><i class="fas fa-user-plus"></i> Registrarse</a>
+          <a href="SeleccionTipoUsuario.html" class="btn-secondary"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
         </div>
       </div>
     </section>
@@ -185,5 +84,60 @@
       <p>&copy; 2024 Energym. Todos los derechos reservados.</p>
     </div>
   </footer>
+
+  <script>
+    let usuarioActual = null;
+    // Detectar sesión para mostrar botón Reservar
+    fetch('../Php/obtener_datos_usuario.php')
+      .then(r => r.ok ? r.json() : null)
+      .then(u => { usuarioActual = u; })
+      .catch(()=>{});
+
+    // Cargar servicios
+    let servicios = [];
+    fetch('../Php/listar_servicios.php')
+      .then(r => r.json())
+      .then(data => { servicios = data || []; render(servicios); })
+      .catch(() => {
+        const m = document.getElementById('msg');
+        m.textContent = 'No se pudieron cargar los servicios.';
+        m.style.display = 'block';
+      });
+
+    // Búsqueda
+    document.getElementById('buscador').addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      const fil = servicios.filter(s =>
+        (s.nombre || '').toLowerCase().includes(q) || (s.codigo || '').toLowerCase().includes(q)
+      );
+      render(fil);
+    });
+
+    function render(items) {
+      const grid = document.getElementById('grid');
+      grid.innerHTML = '';
+      if (!items || items.length === 0) {
+        grid.innerHTML = '<p>No hay servicios disponibles.</p>';
+        return;
+      }
+      items.forEach(s => {
+        const card = document.createElement('div');
+        card.className = 'service-card';
+        card.innerHTML = `
+          <div class="service-image"><img src="../Imagenes/images.jpg" alt="${s.nombre || 'Servicio'}"></div>
+          <div class="service-content">
+            <div class="service-icon"><i class="fas fa-dumbbell"></i></div>
+            <h3>${s.nombre || 'Servicio'}</h3>
+            <p>Código: ${s.codigo || '-'}</p>
+            ${s.costo ? `<p class="price">Costo: ₡${s.costo}</p>` : ''}
+            <div style="margin-top:10px;">
+              ${usuarioActual ? `<a class="reserve-btn" href="nueva_reservacion.html?servicio=${encodeURIComponent(s.codigo)}"><i class='fas fa-calendar-plus'></i> Reservar</a>` : ''}
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+  </script>
 </body>
 </html>

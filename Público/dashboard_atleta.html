@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../Css/dashboard_atleta.css">
+  <title>Dashboard Atleta - Energym</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <h1>Energym</h1>
+      <ul>
+        <li><a href="PaginaPrincipal.html">Inicio</a></li>
+        <li><a href="PagAcercaDe.html">Acerca de</a></li>
+        <li><a href="Contactenos.html">Contáctenos</a></li>
+        <li><a href="Servicios.html">Servicio</a></li>
+        <li><a href="Mapa.html">Mapa</a></li>
+        <li><a href="#" class="user-menu">
+          <i class="fas fa-user"></i>
+          <span id="nombre-usuario">Atleta</span>
+        </a></li>
+        <li><a href="../Php/logout.php" class="logout-btn">
+          <i class="fas fa-sign-out-alt"></i>
+          Cerrar Sesión
+        </a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="welcome-section">
+      <h1>¡Bienvenido, <span id="nombre-completo">Atleta</span>!</h1>
+      <p>Gestiona tus reservaciones y accede a los servicios del gimnasio</p>
+    </div>
+
+    <div class="dashboard-grid">
+      <div class="dashboard-card">
+        <div class="card-icon">
+          <i class="fas fa-calendar-plus"></i>
+        </div>
+        <h3>Nueva Reservación</h3>
+        <p>Reserva tu espacio en cualquiera de nuestras zonas deportivas</p>
+        <a href="nueva_reservacion.html" class="card-btn">
+          <i class="fas fa-plus"></i>
+          Crear Reservación
+        </a>
+      </div>
+
+      <div class="dashboard-card">
+        <div class="card-icon">
+          <i class="fas fa-calendar-check"></i>
+        </div>
+        <h3>Mis Reservaciones</h3>
+        <p>Consulta el estado de tus reservaciones actuales y pasadas</p>
+        <a href="mis_reservaciones.html" class="card-btn">
+          <i class="fas fa-eye"></i>
+          Ver Reservaciones
+        </a>
+      </div>
+
+      <div class="dashboard-card">
+        <div class="card-icon">
+          <i class="fas fa-user-edit"></i>
+        </div>
+        <h3>Mi Perfil</h3>
+        <p>Actualiza tu información personal y credenciales</p>
+        <a href="mi_perfil.html" class="card-btn">
+          <i class="fas fa-edit"></i>
+          Editar Perfil
+        </a>
+      </div>
+
+      <div class="dashboard-card">
+        <div class="card-icon">
+          <i class="fas fa-dumbbell"></i>
+        </div>
+        <h3>Servicios Disponibles</h3>
+        <p>Explora todas las zonas deportivas y servicios del gimnasio</p>
+        <a href="Servicios.html" class="card-btn">
+          <i class="fas fa-list"></i>
+          Ver Servicios
+        </a>
+      </div>
+    </div>
+
+    <div class="quick-stats">
+      <h2>Resumen Rápido</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number" id="reservaciones-pendientes">0</div>
+          <div class="stat-label">Reservaciones Pendientes</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" id="reservaciones-completadas">0</div>
+          <div class="stat-label">Reservaciones Completadas</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" id="servicios-favoritos">0</div>
+          <div class="stat-label">Servicios Favoritos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Cargar datos reales del usuario
+    fetch('../Php/obtener_datos_usuario.php')
+      .then(r => r.json())
+      .then(u => {
+        document.getElementById('nombre-usuario').textContent = u.nombre;
+        document.getElementById('nombre-completo').textContent = `${u.nombre} ${u.apellido1}`;
+      })
+      .catch(() => {});
+
+    // TODO: Reemplazar estadísticas con datos reales cuando implementemos backend
+  </script>
+</body>
+</html>
