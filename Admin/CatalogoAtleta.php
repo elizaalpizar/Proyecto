@@ -26,7 +26,7 @@ $rs  = odbc_exec($conn, $sql);
 
   <main>
     <h2>Catálogo de Atletas</h2>
-    <p><a href="RegistroAtleta.html">+ Nuevo Atleta</a></p>
+    <p><a href="../Público/RegistroAtleta.html">+ Nuevo Atleta</a></p>
     <table>
       <thead>
         <tr>

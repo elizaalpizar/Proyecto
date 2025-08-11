@@ -1,9 +1,15 @@
 <?php
 require_once '../Php/Session.php';
-requireAtleta();
+verificarSesion();
 
-$conn = odbc_connect("Driver={ODBC Driver 17 for SQL Server};Server=server.asralabs.com,14330;Database=Proyecto_Progra3;UID=sa;PWD=19861997.Sr;CharacterSet=UTF8;", '', '') 
-    or die('Error de conexión');
+// Database connection configuration
+$server   = "server.asralabs.com,14330";
+$database = "Proyecto_Progra3";
+$username = "sa";
+$passwordDB = "19861997.Sr";
+$cs = "Driver={ODBC Driver 17 for SQL Server};Server=$server;Database=$database;UID=$username;PWD=$passwordDB;CharacterSet=UTF8;";
+
+$conn = odbc_connect($cs, '', '') or die('Error de conexión');
 
 $stmt = odbc_prepare($conn, "SELECT usuario, nombre, apellido1, apellido2, correo, telefono 
                              FROM atletas WHERE identificacion = ?");

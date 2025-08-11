@@ -41,14 +41,14 @@ odbc_execute($stmt, array($username));
 $row = odbc_fetch_array($stmt);
 
 if ($row && password_verify($password, $row['contrasena'])) {
-    $_SESSION['user_id'] = $row['identificacion'];
-    $_SESSION['username'] = $row['usuario'];
-    $_SESSION['nombre'] = $row['nombre'];
-    $_SESSION['apellido1'] = $row['apellido1'];
-    $_SESSION['apellido2'] = $row['apellido2'];
-    $_SESSION['correo'] = $row['correo'];
-    $_SESSION['telefono'] = $row['telefono'];
-    $_SESSION['logged_in'] = true;
+    $_SESSION['atleta_identificacion'] = $row['identificacion'];
+    $_SESSION['atleta_usuario'] = $row['usuario'];
+    $_SESSION['atleta_nombre'] = $row['nombre'];
+    $_SESSION['atleta_apellido1'] = $row['apellido1'];
+    $_SESSION['atleta_apellido2'] = $row['apellido2'];
+    $_SESSION['atleta_correo'] = $row['correo'];
+    $_SESSION['atleta_telefono'] = $row['telefono'];
+    $_SESSION['atleta_logged_in'] = true;
     
     odbc_close($conn);
     
