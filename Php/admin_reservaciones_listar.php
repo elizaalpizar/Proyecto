@@ -33,7 +33,6 @@ $rows = [];
 $hoy = strtotime(date('Y-m-d'));
 while ($row = odbc_fetch_array($stmt)) {
   $r = array_change_key_case($row, CASE_LOWER);
-  // Normalizar estado si viene nulo o vacío: facturada si fecha < hoy, si no pendiente
   $estado = isset($r['estado']) ? strtolower(trim($r['estado'])) : '';
   if ($estado === '' || $estado === null) {
     $f = isset($r['fecha']) ? strtotime($r['fecha']) : false;

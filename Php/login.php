@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Configuración de conexión a SQL Server
 $server = "server.asralabs.com,14330";
 $database = "Proyecto_Progra3";
 $username = "sa";
@@ -17,7 +16,6 @@ if (!$conn) {
 $username = trim($_POST['username'] ?? '');
 $password = $_POST['password'] ?? '';
 
-// Validar que se recibieron los datos
 if (empty($username) || empty($password)) {
     odbc_close($conn);
     echo "<script>

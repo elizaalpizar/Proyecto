@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Configuración de conexión a SQL Server
 $server = "server.asralabs.com,14330";
 $database = "Proyecto_Progra3";
 $username = "sa";
@@ -17,7 +16,6 @@ if (!$conn) {
 $admin_username = trim($_POST['username'] ?? '');
 $admin_password = $_POST['password'] ?? '';
 
-// Validar que se recibieron los datos
 if (empty($admin_username) || empty($admin_password)) {
     odbc_close($conn);
     echo "<script>
@@ -27,7 +25,6 @@ if (empty($admin_username) || empty($admin_password)) {
     exit();
 }
 
-// Consulta para administradores (asumiendo que tienes una tabla de administradores)
 $sql = "SELECT id_admin, usuario, contrasena, nombre, apellido, correo, rol 
         FROM administradores 
         WHERE usuario = ?";
@@ -42,7 +39,6 @@ odbc_execute($stmt, array($admin_username));
 $row = odbc_fetch_array($stmt);
 
 if ($row && password_verify($admin_password, $row['contrasena'])) {
-    // Crear sesión de administrador
     $_SESSION['admin_id'] = $row['id_admin'];
     $_SESSION['admin_username'] = $row['usuario'];
     $_SESSION['admin_nombre'] = $row['nombre'];
@@ -53,7 +49,6 @@ if ($row && password_verify($admin_password, $row['contrasena'])) {
     
     odbc_close($conn);
     
-    // Redirigir al panel de administración
     header("Location: ../Admin/Catalogo_menu(CRUD).html");
     exit();
 } else {

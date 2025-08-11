@@ -174,7 +174,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                 <textarea name="comentarios" id="comentarios" placeholder="Especifique cualquier requerimiento especial o comentario..."></textarea>
             </div>
             
-            <button type="submit" class="btn-reservar">Confirmar Reservación</button>
+            <button type="submit" class="btn-reservar">Confirmar ++++++++</button>
         </form>
         
         <a href="../Php/logout.php" class="btn-logout">Cerrar Sesión</a>

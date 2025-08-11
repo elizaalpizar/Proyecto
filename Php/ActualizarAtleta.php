@@ -2,7 +2,6 @@
 session_start();
 header('Content-Type: text/html; charset=UTF-8');
 
-// Database connection configuration
 $server   = "server.asralabs.com,14330";
 $database = "Proyecto_Progra3";
 $username = "sa";

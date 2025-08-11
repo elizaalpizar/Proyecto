@@ -21,7 +21,6 @@ $apellido2      = limpiarDatos($_POST['apellido2'] ?? '');
 $correo         = limpiarDatos($_POST['correo'] ?? '');
 $telefono       = limpiarDatos($_POST['telefono'] ?? '');
 
-// Validaciones mínimas del lado servidor
 $errores = [];
 if (!preg_match('/^\d{9,12}$/', $identificacion)) $errores[] = 'Identificación inválida';
 if (strlen($usuario) < 4) $errores[] = 'Usuario muy corto';
@@ -34,7 +33,6 @@ if ($errores) {
   resp(implode('. ', $errores), 'error');
 }
 
-// Verificar duplicados (identificación y usuario)
 $chk = odbc_prepare($conn, 'SELECT identificacion, usuario FROM atletas WHERE identificacion = ? OR usuario = ?');
 odbc_execute($chk, [$identificacion, $usuario]);
 $dupId = false; $dupUser = false;
@@ -48,7 +46,6 @@ if ($dupId && $dupUser) resp('Ya existe un atleta con esa identificación y usua
 if ($dupId) resp('Ya existe un atleta con esa identificación.');
 if ($dupUser) resp('El nombre de usuario ya está en uso.');
 
-// Insertar
 $hash = password_hash($password, PASSWORD_DEFAULT);
 $sql = 'INSERT INTO atletas (identificacion, usuario, contrasena, nombre, apellido1, apellido2, correo, telefono) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
 $stmt = odbc_prepare($conn, $sql);

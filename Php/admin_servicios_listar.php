@@ -4,14 +4,12 @@ require_once 'conexion_json.php';
 
 header('Content-Type: application/json; charset=UTF-8');
 
-// Solo administradores (respuesta JSON, sin redirecciones)
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     http_response_code(401);
     echo json_encode(['error' => 'No autorizado']);
     exit();
 }
 
-// Asegurar tabla servicios (primera ejecución mínima si no existe)
 @odbc_exec($conn, "IF OBJECT_ID('dbo.servicios','U') IS NULL
 BEGIN
   CREATE TABLE servicios (
@@ -27,7 +25,6 @@ BEGIN
 END");
 
 try {
-    // Si 'tipo' está vacío pero existe 'tipo_zona', devolver ese valor como 'tipo'
     $sql = "SELECT codigo, nombre, COALESCE(NULLIF(tipo, ''), tipo_zona) AS tipo, instructor, costo
             FROM dbo.servicios
             ORDER BY id DESC";
@@ -42,7 +39,6 @@ try {
     $servicios = [];
     while ($row = odbc_fetch_array($stmt)) {
         $r = array_change_key_case($row, CASE_LOWER);
-        // Normalizar codificación a UTF-8 para evitar que json_encode devuelva null
         foreach ($r as $k => $v) {
             if (is_string($v)) {
                 if (function_exists('mb_detect_encoding')) {

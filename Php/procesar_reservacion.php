@@ -50,7 +50,6 @@ if (count($errores) > 0) {
   exit();
 }
 
-// Evitar solape exacto en mismo servicio
 $sqlCheck = "SELECT 1 FROM reservaciones WHERE fecha = ? AND hora = ? AND servicio = ?";
 $stmtCheck = odbc_prepare($conn, $sqlCheck);
 odbc_execute($stmtCheck, [$fechaSQL, $horaSQL, $servicio]);

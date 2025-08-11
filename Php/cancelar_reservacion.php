@@ -13,7 +13,6 @@ if ($id <= 0) {
   exit();
 }
 
-// Solo permitir cancelar si la fecha es hoy o futura
 $sql = "SELECT fecha FROM reservaciones WHERE id = ? AND id_atleta = ?";
 $stmt = odbc_prepare($conn, $sql);
 odbc_execute($stmt, [$id, $_SESSION['atleta_id']]);

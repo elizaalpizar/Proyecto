@@ -39,7 +39,6 @@ if ($costoRaw !== '') {
   }
 }
 
-// Resolver nombres reales de columnas según esquema existente
 function getColumnsInfo($conn) {
   $cols = [];
   $sql = "SELECT COLUMN_NAME, IS_NULLABLE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'servicios'";
@@ -55,17 +54,13 @@ function getColumnsInfo($conn) {
 
 $info = getColumnsInfo($conn);
 
-// Helper para saber si existe una columna (en minúsculas)
 function hasCol($info, $name) { return array_key_exists(strtolower($name), $info); }
 
-// Columnas clave
 $colCodigo = null; foreach (['codigo','id','codigo_servicio','cod_servicio'] as $c) { if (hasCol($info,$c)) { $colCodigo = $c; break; } }
 $colNombre = null; foreach (['nombre','nombre_zona','zona','nombre_servicio'] as $c) { if (hasCol($info,$c)) { $colNombre = $c; break; } }
 
-// Conjunto de columnas para "tipo". Si hay varias y alguna NO NULL, incluirla también.
 $tipoColumns = array_values(array_filter(['tipo','tipo_zona','tipo_servicio'], function($c) use ($info){ return hasCol($info,$c); }));
 
-// Instructor/costo (si existen)
 $colInstructor = null; foreach (['instructor','instructor_a_cargo','instructor_cargo'] as $c) { if (hasCol($info,$c)) { $colInstructor = $c; break; } }
 $colCosto      = null; foreach (['costo','precio','monto'] as $c) { if (hasCol($info,$c)) { $colCosto = $c; break; } }
 
@@ -78,7 +73,6 @@ if ($colCodigo === null || $colNombre === null) {
   exit();
 }
 
-// Construir UPDATE dinámico
 $setParts = [];
 $paramsUpd = [];
 if ($colNombre)     { $setParts[] = "$colNombre = ?";     $paramsUpd[] = $nombre; }
@@ -102,7 +96,6 @@ if ($okUpd && odbc_num_rows($update) > 0) {
   exit();
 }
 
-// Construir INSERT dinámico
 $cols = [$colCodigo, $colNombre];
 $vals = [$codigo, $nombre];
 if (!empty($tipoColumns)) {

@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Función para verificar si el usuario está logueado como administrador
 function verificarSesionAdmin() {
     if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
         header("Location: ../Público/SeleccionTipoUsuario.html");
@@ -10,7 +9,6 @@ function verificarSesionAdmin() {
     return true;
 }
 
-// Función para obtener información del administrador logueado
 function obtenerInfoAdmin() {
     if (verificarSesionAdmin()) {
         return [
@@ -25,9 +23,7 @@ function obtenerInfoAdmin() {
     return null;
 }
 
-// Función para cerrar sesión de administrador
 function cerrarSesionAdmin() {
-    // Destruir todas las variables de sesión de administrador
     unset($_SESSION['admin_id']);
     unset($_SESSION['admin_username']);
     unset($_SESSION['admin_nombre']);
@@ -36,15 +32,12 @@ function cerrarSesionAdmin() {
     unset($_SESSION['admin_rol']);
     unset($_SESSION['admin_logged_in']);
     
-    // Destruir la sesión
     session_destroy();
     
-    // Redirigir a la página de selección
     header("Location: ../Público/SeleccionTipoUsuario.html");
     exit();
 }
 
-// Función para verificar permisos específicos
 function verificarPermisos($rolRequerido = 'admin') {
     if (!verificarSesionAdmin()) {
         return false;
@@ -55,7 +48,6 @@ function verificarPermisos($rolRequerido = 'admin') {
         return false;
     }
     
-    // Verificar si el rol del administrador coincide con el requerido
     if ($infoAdmin['rol'] === 'super_admin' || $infoAdmin['rol'] === $rolRequerido) {
         return true;
     }

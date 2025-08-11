@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Función para verificar si el atleta está logueado
 function verificarSesion() {
     if (!isset($_SESSION['atleta_logged_in']) || $_SESSION['atleta_logged_in'] !== true) {
         header("Location: ../Público/InicioSesion.html");
@@ -10,7 +9,6 @@ function verificarSesion() {
     return true;
 }
 
-// Función para verificar si el administrador está logueado
 function requireAdmin() {
     if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
         header("Location: ../Admin/InicioSesionAdmin.html");
@@ -19,7 +17,6 @@ function requireAdmin() {
     return true;
 }
 
-// Función para obtener información del atleta logueado
 function obtenerInfoAtleta() {
     if (verificarSesion()) {
         return [
@@ -35,7 +32,6 @@ function obtenerInfoAtleta() {
     return null;
 }
 
-// Función para obtener información del administrador logueado
 function obtenerInfoAdmin() {
     if (requireAdmin()) {
         return [
@@ -50,7 +46,6 @@ function obtenerInfoAdmin() {
     return null;
 }
 
-// Función para cerrar sesión de atleta
 function cerrarSesionAtleta() {
     unset($_SESSION['atleta_logged_in']);
     unset($_SESSION['atleta_identificacion']);
@@ -65,7 +60,6 @@ function cerrarSesionAtleta() {
     exit();
 }
 
-// Función para cerrar sesión de administrador
 function cerrarSesionAdmin() {
     unset($_SESSION['admin_id']);
     unset($_SESSION['admin_username']);

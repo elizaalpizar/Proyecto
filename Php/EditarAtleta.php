@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Database connection configuration
 $server   = "server.asralabs.com,14330";
 $database = "Proyecto_Progra3";
 $username = "sa";
@@ -34,7 +33,6 @@ if (!$row = odbc_fetch_array($stmt)) {
 <body>
   <h2>Editar Atleta <?= htmlspecialchars($id) ?></h2>
   <form action="ActualizarAtleta.php" method="post" novalidate>
-    <!-- Campo oculto para saber qué registro actualizar -->
     <input type="hidden" name="identificacion_old" value="<?= htmlspecialchars($id) ?>">
 
     <label for="identificacion">Identificación</label>
