@@ -14,7 +14,6 @@ if (!$conn) {
     die("Error de conexión: " . odbc_errormsg());
 }
 
-// Obtener datos del formulario
 $username = trim($_POST['username'] ?? '');
 $password = $_POST['password'] ?? '';
 
@@ -28,7 +27,6 @@ if (empty($username) || empty($password)) {
     exit();
 }
 
-// Consulta para verificar las credenciales
 $sql = "SELECT identificacion, usuario, contrasena, nombre, apellido1, apellido2, correo, telefono 
         FROM atletas 
         WHERE usuario = ?";
@@ -43,7 +41,6 @@ odbc_execute($stmt, array($username));
 $row = odbc_fetch_array($stmt);
 
 if ($row && password_verify($password, $row['contrasena'])) {
-    // Autenticación exitosa
     $_SESSION['user_id'] = $row['identificacion'];
     $_SESSION['username'] = $row['usuario'];
     $_SESSION['nombre'] = $row['nombre'];
@@ -53,17 +50,13 @@ if ($row && password_verify($password, $row['contrasena'])) {
     $_SESSION['telefono'] = $row['telefono'];
     $_SESSION['logged_in'] = true;
     
-    // Cerrar conexión
     odbc_close($conn);
     
-    // Redirigir a la página de reservación
     header("Location: ../Privado/Reservacion.php");
     exit();
 } else {
-    // Autenticación fallida
     odbc_close($conn);
     
-    // Redirigir de vuelta al login con mensaje de error
     echo "<script>
         alert('Usuario o contraseña incorrectos. Por favor, intente nuevamente.');
         window.location.href = '../Público/InicioSesion.html';
