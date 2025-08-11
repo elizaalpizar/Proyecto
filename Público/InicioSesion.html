@@ -16,7 +16,6 @@
         <p>Ingresa tus credenciales para acceder a tu cuenta de atleta</p>
       </div>
       
-      <!-- Mostrar mensaje de error si existe -->
       <div id="error-message" class="error-message" style="display: none;"></div>
       
       <form action="../Php/procesar_login.php" method="POST" class="login-form">
@@ -37,7 +36,6 @@
     </div>
   </div>
   <script>
-    // Efectos de focus en los inputs
     document.querySelectorAll('.form-group input').forEach(input => {
       input.addEventListener('focus', function() {
         this.parentElement.classList.add('focused');
@@ -50,7 +48,6 @@
       });
     });
 
-    // Validación del formulario
     document.querySelector('.login-form').addEventListener('submit', function(e) {
       const usuario = document.getElementById('usuario').value.trim();
       const contrasena = document.getElementById('contrasena').value;
@@ -62,19 +59,16 @@
       }
     });
 
-    // Función para mostrar errores
     function mostrarError(mensaje) {
       const errorDiv = document.getElementById('error-message');
       errorDiv.textContent = mensaje;
       errorDiv.style.display = 'block';
       
-      // Ocultar el error después de 5 segundos
       setTimeout(() => {
         errorDiv.style.display = 'none';
       }, 5000);
     }
 
-    // Verificar si hay mensaje de error en la URL (desde PHP)
     window.onload = function() {
       const urlParams = new URLSearchParams(window.location.search);
       const error = urlParams.get('error');

@@ -59,7 +59,7 @@
         </div>
         <div class="form-group">
           <label for="hora">Hora</label>
-          <input type="time" id="hora" name="hora" required />
+          <input type="time" id="hora" name="hora" min="05:00" max="22:00" required />
         </div>
         <div class="form-group">
           <label for="duracion">Duración (horas)</label>
@@ -82,12 +82,10 @@
   </div>
 
   <script>
-    // Cargar nombre del usuario
     fetch('../Php/obtener_datos_usuario.php').then(r=>r.json()).then(u=>{
       document.getElementById('nombre-usuario').textContent = u.nombre;
     }).catch(()=>{});
 
-    // Llenar servicios desde BD
     const params = new URLSearchParams(window.location.search);
     const servicioQS = params.get('servicio');
 
@@ -111,12 +109,10 @@
         msg.style.display = 'block';
       });
 
-    // Validaciones básicas
     const inputFecha = document.getElementById('fecha');
     const hoy = new Date().toISOString().slice(0,10);
     inputFecha.min = hoy;
 
-    // Mostrar mensaje por query params
     const mensaje = params.get('mensaje');
     const tipo = params.get('tipo');
     if (mensaje) {
@@ -124,7 +120,7 @@
       msg.className = 'mensaje ' + (tipo || 'success');
       msg.textContent = mensaje;
       msg.style.display = 'block';
-      // limpiar la URL
+
       window.history.replaceState({}, document.title, window.location.pathname + (servicioQS ? `?servicio=${encodeURIComponent(servicioQS)}` : ''));
     }
   </script>

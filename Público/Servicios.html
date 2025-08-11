@@ -40,10 +40,6 @@
 
     <div id="msg" class="mensaje error"></div>
 
-    <div class="filters">
-      <input id="buscype="text" placeholder="Buscar por nombre o código..." />
-    </div>
-
     <section class="services-section">
       <div id="grid" class="services-grid"></div>
     </section>
@@ -87,13 +83,11 @@
 
   <script>
     let usuarioActual = null;
-    // Detectar sesión para mostrar botón Reservar
     fetch('../Php/obtener_datos_usuario.php')
       .then(r => r.ok ? r.json() : null)
       .then(u => { usuarioActual = u; })
       .catch(()=>{});
 
-    // Cargar servicios
     let servicios = [];
     fetch('../Php/listar_servicios.php')
       .then(r => r.json())
@@ -104,7 +98,6 @@
         m.style.display = 'block';
       });
 
-    // Búsqueda
     document.getElementById('buscador').addEventListener('input', (e) => {
       const q = e.target.value.toLowerCase();
       const fil = servicios.filter(s =>

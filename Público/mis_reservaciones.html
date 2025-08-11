@@ -59,7 +59,6 @@
   </div>
 
   <script>
-    // Mostrar mensajes por query params
     const params = new URLSearchParams(window.location.search);
     const mensaje = params.get('mensaje');
     const tipo = params.get('tipo');
@@ -71,7 +70,6 @@
       window.history.replaceState({}, document.title, window.location.pathname);
     }
 
-    // Cargar lista
     fetch('../Php/listar_reservaciones.php')
       .then(r => r.json())
       .then(data => render(data))
