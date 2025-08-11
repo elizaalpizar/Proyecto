@@ -2,7 +2,6 @@
 require_once '../Php/Session.php';
 verificarSesion();
 
-// Database connection configuration
 $server   = "server.asralabs.com,14330";
 $database = "Proyecto_Progra3";
 $username = "sa";

@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Verificar si el usuario está autenticado
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: ../Público/InicioSesion.html");
     exit();
@@ -139,6 +138,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                 <label for="hora">Hora de Reservación:</label>
                 <select name="hora" id="hora" required>
                     <option value="">Seleccione una hora</option>
+                    <option value="06:00">5:00 AM</option>
                     <option value="06:00">6:00 AM</option>
                     <option value="07:00">7:00 AM</option>
                     <option value="08:00">8:00 AM</option>
@@ -154,6 +154,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                     <option value="18:00">6:00 PM</option>
                     <option value="19:00">7:00 PM</option>
                     <option value="20:00">8:00 PM</option>
+                    <option value="20:00">9:00 PM</option>
+                    <option value="20:00">10:00 PM</option>
                 </select>
             </div>
             

@@ -88,7 +88,6 @@
   </div>
 
   <script>
-    // Cargar datos reales del usuario
     fetch('../Php/obtener_datos_usuario.php')
       .then(r => r.json())
       .then(u => {
@@ -97,7 +96,6 @@
       })
       .catch(() => {});
 
-    // TODO: Reemplazar estadísticas con datos reales cuando implementemos backend
   </script>
 </body>
 </html>
