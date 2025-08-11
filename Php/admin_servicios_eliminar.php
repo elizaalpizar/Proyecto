@@ -1,30 +1,43 @@
 <?php
 session_start();
-require_once 'conexion.php';
+require_once 'conexion_json.php';
+ob_start();
+
+header('Content-Type: application/json; charset=UTF-8');
 
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
   http_response_code(401);
-  echo 'No autorizado';
+  $payload = json_encode(['error' => 'No autorizado']);
+  ob_clean();
+  echo $payload;
   exit();
 }
 
-$codigo = isset($_POST['codigo']) ? trim($_POST['codigo']) : '';
+$codigo = limpiarDatos($_POST['codigo'] ?? '');
 if ($codigo === '') {
   http_response_code(400);
-  echo 'Código requerido';
+  $payload = json_encode(['error' => 'Código requerido']);
+  ob_clean();
+  echo $payload;
+  cerrarConexion($conn);
   exit();
 }
 
-$stmt = odbc_prepare($conn, 'DELETE FROM servicios WHERE codigo = ?');
+$stmt = odbc_prepare($conn, "DELETE FROM servicios WHERE codigo = ?");
 $ok = odbc_execute($stmt, [$codigo]);
 
-if ($ok) {
-  echo 'OK';
+if ($ok && odbc_num_rows($stmt) >= 0) {
+  $payload = json_encode(['mensaje' => 'Servicio eliminado']);
+  ob_clean();
+  echo $payload;
 } else {
   http_response_code(500);
-  echo 'Error: ' . odbc_errormsg();
+  $payload = json_encode(['error' => 'No se pudo eliminar: ' . odbc_errormsg($conn)]);
+  ob_clean();
+  echo $payload;
 }
 
-odbc_free_result($stmt);
 cerrarConexion($conn);
 ?>
+
+

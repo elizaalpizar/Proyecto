@@ -88,7 +88,7 @@ $params[] = $id_old;
 $ok = odbc_execute($stmt, $params);
 if ($ok) {
     echo "<p style='color:green;'>¡Datos actualizados correctamente!</p>";
-    echo "<p><a href='CatalogoAtletas.php'>Volver al catálogo</a></p>";
+    echo "<p><a href='../Admin/CatalogoAtleta.php'>Volver al catálogo</a></p>";
 } else {
     echo "<p style='color:red;'>Error al actualizar: " . odbc_errormsg($conn) . "</p>";
 }
