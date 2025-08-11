@@ -41,7 +41,7 @@
     <div id="msg" class="mensaje error"></div>
 
     <div class="filters">
-      <input id="buscador" type="text" placeholder="Buscar por nombre o código..." />
+      <input id="buscype="text" placeholder="Buscar por nombre o código..." />
     </div>
 
     <section class="services-section">
@@ -113,6 +113,30 @@
       render(fil);
     });
 
+    function quitarAcentos(txt){
+      return (txt || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+
+    function getImagenServicio(s){
+      const nombre = quitarAcentos((s.nombre || '').toLowerCase());
+      const codigo = (s.codigo || '').toLowerCase();
+      const palabras = [nombre, codigo].join(' ');
+
+      const mapa = [
+        { k: ['cardio'], img: 'cardio.jpg' },
+        { k: ['funcional','funcionales'], img: 'Funcionales.jpg' },
+        { k: ['pesas','mancuernas','fuerza'], img: 'Mancuernas.jpg' },
+        { k: ['nutricion','nutricion deportiva','nutricion_deportiva'], img: 'Nutrición_Deportiva.jpg' },
+        { k: ['sauna','recuperacion','recuperación'], img: 'Sauna_Recuperacion.jpg' },
+        { k: ['piscina','acuatico','acuatico'], img: 'images2.jpg' }
+      ];
+
+      for (const m of mapa){
+        if (m.k.some(x => palabras.includes(x))) return m.img;
+      }
+      return 'images.jpg';
+    }
+
     function render(items) {
       const grid = document.getElementById('grid');
       grid.innerHTML = '';
@@ -124,7 +148,7 @@
         const card = document.createElement('div');
         card.className = 'service-card';
         card.innerHTML = `
-          <div class="service-image"><img src="../Imagenes/images.jpg" alt="${s.nombre || 'Servicio'}"></div>
+          <div class="service-image"><img src="../Imagenes/${getImagenServicio(s)}" alt="${s.nombre || 'Servicio'}"></div>
           <div class="service-content">
             <div class="service-icon"><i class="fas fa-dumbbell"></i></div>
             <h3>${s.nombre || 'Servicio'}</h3>
