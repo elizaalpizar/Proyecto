@@ -1,0 +1,7 @@
+# Evitar subir credenciales sensibles
+Php/mail_config.php
+Php/mail_config.local.php
+vendor/
+node_modules/
+.env
+
