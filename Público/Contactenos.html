@@ -92,13 +92,14 @@
 
         <div class="contact-form">
           <h3>Envíanos un mensaje</h3>
-          <form action="../Php/Contactenos.php" method="POST" class="form">
+          <form action="../Php/Contactenos.php" method="POST" class="form" id="contactForm">
             <div class="form-group">
-              <label for="nombre">
+              <label for="name">
                 <i class="fas fa-user"></i>
                 Nombre completo
               </label>
-              <input type="text" id="nombre" name="nombre" required placeholder="Ingresa tu nombre completo">
+              <input type="text" id="name" name="name" required placeholder="Ingresa tu nombre completo">
+              <span class="error-message" id="nameError"></span>
             </div>
             
             <div class="form-group">
@@ -107,29 +108,32 @@
                 Email
               </label>
               <input type="email" id="email" name="email" required placeholder="Ingresa tu email">
+              <span class="error-message" id="emailError"></span>
             </div>  
             
             <div class="form-group">
-              <label for="asunto">
-                <i class="fas fa-tag"></i>
+              <label for="rating">
+                <i class="fas fa-star"></i>
                 Evaluación de la experiencia
               </label>
-              <select id="asunto" name="asunto" required>
-                <option value="">Elija una opción: </option>
-                <option value="">1-Muy insatisfecho</option>
-                <option value="Información general">2-Insatisfecho</option>
-                <option value="Membresías">3-Nuetral</option>
-                <option value="Clases y horarios">4-Satisfecho</option>
-                <option value="Problemas técnicos">5-Muy Satisfecho</option>
+              <select id="rating" name="rating" required>
+                <option value="">Elija una opción</option>
+                <option value="1-Muy insatisfecho">1-Muy insatisfecho</option>
+                <option value="2-Insatisfecho">2-Insatisfecho</option>
+                <option value="3-Neutral">3-Neutral</option>
+                <option value="4-Satisfecho">4-Satisfecho</option>
+                <option value="5-Muy Satisfecho">5-Muy Satisfecho</option>
               </select>
+              <span class="error-message" id="ratingError"></span>
             </div>
             
             <div class="form-group">
-              <label for="mensaje">
+              <label for="message">
                 <i class="fas fa-comment"></i>
                 Mensaje
               </label>
-              <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Escribe tu mensaje aquí..."></textarea>
+              <textarea id="message" name="message" rows="5" required placeholder="Escribe tu mensaje aquí..."></textarea>
+              <span class="error-message" id="messageError"></span>
             </div>
             
             <button type="submit" class="submit-btn">
@@ -166,5 +170,6 @@
       <p>&copy; 2024 Energym. Todos los derechos reservados.</p>
     </div>
   </footer>
+  <script src="../JS/ValidaciónContactenos.js"></script>
 </body>
 </html>
