@@ -1,8 +1,6 @@
 <?php
-// Configuración de headers para JSON
 header('Content-Type: application/json; charset=utf-8');
 
-// Verificar que se haya enviado el formulario
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode([
         'success' => false, 
@@ -11,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
-// Verificar que todos los campos requeridos estén presentes
 $required_fields = ['name', 'email', 'rating', 'message'];
 $missing_fields = [];
 
@@ -29,13 +26,11 @@ if (!empty($missing_fields)) {
     exit();
 }
 
-// Validar y sanitizar los datos del formulario
 $nombre = filter_var(trim($_POST['name']), FILTER_SANITIZE_STRING);
 $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
 $rating = filter_var(trim($_POST['rating']), FILTER_SANITIZE_STRING);
 $mensaje = filter_var(trim($_POST['message']), FILTER_SANITIZE_STRING);
 
-// Validaciones adicionales
 if (strlen($nombre) < 2 || strlen($nombre) > 100) {
     echo json_encode([
         'success' => false, 
@@ -60,11 +55,9 @@ if (strlen($mensaje) < 10 || strlen($mensaje) > 1000) {
     exit();
 }
 
-// Configuración del correo
 $to = 'eliza.alpizar2401@gmail.com'; // Correo de destino
 $subject = 'Nueva consulta desde el formulario de contacto - Energym';
 
-// Construir el cuerpo del mensaje
 $message_body = "Se ha recibido una nueva consulta desde el formulario de contacto:\n\n";
 $message_body .= "Nombre: " . $nombre . "\n";
 $message_body .= "Email: " . $email . "\n";
@@ -74,17 +67,14 @@ $message_body .= "Fecha: " . date('Y-m-d H:i:s') . "\n";
 $message_body .= "IP: " . $_SERVER['REMOTE_ADDR'] . "\n";
 $message_body .= "User Agent: " . $_SERVER['HTTP_USER_AGENT'] . "\n";
 
-// Headers del correo
 $headers = "From: noreply@energym.com\r\n";
 $headers .= "Reply-To: " . $email . "\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
 $headers .= "X-Requested-With: XMLHttpRequest\r\n";
 
-// Intentar enviar el correo
 try {
     if (mail($to, $subject, $message_body, $headers)) {
-        // Log del éxito (opcional)
         error_log("Formulario de contacto enviado exitosamente desde: " . $email);
         
         echo json_encode([
@@ -95,7 +85,6 @@ try {
         throw new Exception('La función mail() falló');
     }
 } catch (Exception $e) {
-    // Log del error
     error_log("Error al enviar formulario de contacto: " . $e->getMessage() . " - Email: " . $email);
     
     echo json_encode([
