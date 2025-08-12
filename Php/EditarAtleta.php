@@ -28,48 +28,74 @@ if (!$row = odbc_fetch_array($stmt)) {
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Editar Atleta</title>
+  <link rel="stylesheet" href="../Css/Registro.css">
+  <style>
+    .container { max-width: 900px; margin: 24px auto; background: #fff; padding: 24px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+    h2 { margin-bottom: 16px; }
+    form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    form label { font-weight: 700; color: #374151; }
+    form input { padding: 12px; border: 1px solid #e5e7eb; border-radius: 10px; }
+    .full { grid-column: 1 / -1; }
+    .actions { grid-column: 1 / -1; display: flex; gap: 12px; justify-content: flex-end; }
+    .btn { padding: 10px 16px; border-radius: 10px; border: none; cursor: pointer; font-weight: 700; }
+    .btn-primary { background:#4f46e5; color:#fff; }
+    .btn-secondary { background:#e5e7eb; color:#111827; }
+  </style>
 </head>
 <body>
-  <h2>Editar Atleta <?= htmlspecialchars($id) ?></h2>
-  <form action="ActualizarAtleta.php" method="post" novalidate>
-    <input type="hidden" name="identificacion_old" value="<?= htmlspecialchars($id) ?>">
+  <div class="container">
+    <h2>Editar Atleta <?= htmlspecialchars($id) ?></h2>
+    <form action="ActualizarAtleta.php" method="post" novalidate>
+      <input type="hidden" name="identificacion_old" value="<?= htmlspecialchars($id) ?>">
 
-    <label for="identificacion">Identificación</label>
-    <input type="text" id="identificacion" name="identificacion_new"
-           pattern="[0-9]{9,12}" required
-           value="<?= htmlspecialchars($id) ?>">
+      <div class="full">
+        <label for="identificacion">Identificación</label>
+        <input type="text" id="identificacion" name="identificacion_new" pattern="[0-9]{9,12}" required value="<?= htmlspecialchars($id) ?>">
+      </div>
 
-    <label for="usuario">Usuario</label>
-    <input type="text" id="usuario" name="usuario" minlength="4" required
-           value="<?= htmlspecialchars($row['usuario']) ?>">
+      <div>
+        <label for="usuario">Usuario</label>
+        <input type="text" id="usuario" name="usuario" minlength="4" required value="<?= htmlspecialchars($row['usuario']) ?>">
+      </div>
 
-    <label for="password">Nueva Contraseña (opcional)</label>
-    <input type="password" id="password" name="password" minlength="6"
-           placeholder="Solo si deseas cambiarla">
+      <div>
+        <label for="password">Nueva Contraseña (opcional)</label>
+        <input type="password" id="password" name="password" minlength="6" placeholder="Solo si deseas cambiarla">
+      </div>
 
-    <label for="nombre">Nombre</label>
-    <input type="text" id="nombre" name="nombre" required
-           value="<?= htmlspecialchars($row['nombre']) ?>">
+      <div>
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" required value="<?= htmlspecialchars($row['nombre']) ?>">
+      </div>
 
-    <label for="apellido1">Primer Apellido</label>
-    <input type="text" id="apellido1" name="apellido1" required
-           value="<?= htmlspecialchars($row['apellido1']) ?>">
+      <div>
+        <label for="apellido1">Primer Apellido</label>
+        <input type="text" id="apellido1" name="apellido1" required value="<?= htmlspecialchars($row['apellido1']) ?>">
+      </div>
 
-    <label for="apellido2">Segundo Apellido</label>
-    <input type="text" id="apellido2" name="apellido2" required
-           value="<?= htmlspecialchars($row['apellido2']) ?>">
+      <div>
+        <label for="apellido2">Segundo Apellido</label>
+        <input type="text" id="apellido2" name="apellido2" required value="<?= htmlspecialchars($row['apellido2']) ?>">
+      </div>
 
-    <label for="correo">Correo Electrónico</label>
-    <input type="email" id="correo" name="correo" required
-           value="<?= htmlspecialchars($row['correo']) ?>">
+      <div>
+        <label for="correo">Correo Electrónico</label>
+        <input type="email" id="correo" name="correo" required value="<?= htmlspecialchars($row['correo']) ?>">
+      </div>
 
-    <label for="telefono">Teléfono</label>
-    <input type="tel" id="telefono" name="telefono" pattern="[0-9]{8}" required
-           value="<?= htmlspecialchars($row['telefono']) ?>">
+      <div>
+        <label for="telefono">Teléfono</label>
+        <input type="tel" id="telefono" name="telefono" pattern="[0-9]{8}" required value="<?= htmlspecialchars($row['telefono']) ?>">
+      </div>
 
-    <button type="submit">Guardar Cambios</button>
-  </form>
+      <div class="actions">
+        <a class="btn btn-secondary" href="../Admin/CatalogoAtleta.php">Cancelar</a>
+        <button class="btn btn-primary" type="submit">Guardar Cambios</button>
+      </div>
+    </form>
+  </div>
 </body>
 </html>
 <?php odbc_close($conn); ?>
