@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
     .list-card { background: rgba(255,255,255,0.95); border-radius: 16px; padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); max-width: 1100px; margin: 24px auto; }
-    .res-row { display: grid; grid-template-columns: 1fr 120px 120px 120px 140px 140px; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; }
+    .res-row { display: grid; grid-template-columns: 1fr 120px 100px 100px 140px 140px; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; }
     .res-head { font-weight: 800; color: #4f46e5; }
     .badge { padding: 6px 10px; border-radius: 999px; font-weight: 700; font-size: 12px; display: inline-block; text-align: center; }
     .badge.pendiente { background: #eef2ff; color: #4338ca; }
@@ -93,8 +93,8 @@
         row.innerHTML = `
           <div>${r.servicio}</div>
           <div>${r.fecha}</div>
-          <div>${r.hora}</div>
-          <div>${r.duracion} h</div>
+          <div>${(r.hora || '').toString().substring(0,5)}</div>
+          <div>${(r.duracion || '').toString().replace(/\.0+$/, '')} h</div>
           <div><span class="badge ${r.estadoCalculado}">${r.estadoCalculado}</span></div>
           <div class="actions">
             ${r.estadoCalculado === 'pendiente' ? `<form action="../Php/cancelar_reservacion.php" method="POST" onsubmit="return confirm('¿Esta seguro que quiere cancelar esta reservación?');"><input type="hidden" name="id" value="${r.id}" /><button class="btn-cancel" type="submit">Cancelar</button></form>` : ''}
