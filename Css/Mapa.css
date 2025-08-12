@@ -25,12 +25,20 @@ body {
   z-index: 1000;
 }
 
+<<<<<<< HEAD
+    header {
+      background: transparent;
+      padding: 0;
+      color: inherit;
+    }
+=======
 .navbar h1 {
   color: #667eea;
   font-size: 2rem;
   font-weight: 800;
   margin-bottom: 0.5rem;
 }
+>>>>>>> 6f284e0dae720d86b4a8cfcc4fdad9a7bbc940dc
 
 .navbar ul {
   list-style: none;
@@ -76,6 +84,14 @@ body {
   text-align: center;
 }
 
+<<<<<<< HEAD
+    .contenedor-mapa {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 20px;
+      text-align: center;
+    }
+=======
 .contenedor-mapa p {
   font-size: 1.2rem;
   color: #666;
@@ -83,6 +99,7 @@ body {
   margin: 0 auto 3rem auto;
   text-align: center;
 }
+>>>>>>> 6f284e0dae720d86b4a8cfcc4fdad9a7bbc940dc
 
 /* Contenedor del mapa con estilo de tarjeta */
 .contenedor-mapa iframe {
@@ -111,6 +128,18 @@ body {
   margin-top: 4rem;
 }
 
+<<<<<<< HEAD
+    footer {
+      background: rgba(0, 0, 0, 0.8);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+      font-size: 0.95rem;
+    }
+=======
 .footer-content {
   max-width: 1200px;
   margin: 0 auto;
@@ -119,13 +148,23 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
 }
+>>>>>>> 6f284e0dae720d86b4a8cfcc4fdad9a7bbc940dc
 
+<<<<<<< HEAD
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+=======
 .footer-section h4 {
   font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 1rem;
   color: #667eea;
 }
+>>>>>>> 6f284e0dae720d86b4a8cfcc4fdad9a7bbc940dc
 
 .footer-section p {
   margin-bottom: 0.5rem;
