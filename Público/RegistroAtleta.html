@@ -10,6 +10,113 @@
     .mensaje { margin: 12px auto; max-width: 450px; padding: 12px 16px; border-radius: 10px; font-weight: 600; }
     .mensaje.error { background: #fde8e8; color: #b91c1c; }
     .mensaje.success { background: #e6fffa; color: #065f46; }
+    
+    /* Estilos para el preview de datos */
+    .datos-preview {
+      background: #f8f9fa;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 600px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    .datos-preview h3 {
+      color: #495057;
+      margin: 0 0 16px 0;
+      text-align: center;
+      font-size: 1.2em;
+    }
+    
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 12px;
+    }
+    
+    .preview-item {
+      background: white;
+      padding: 12px;
+      border-radius: 8px;
+      border-left: 4px solid #007bff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .preview-item strong {
+      color: #495057;
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.9em;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .preview-item span:not(.no-dato) {
+      color: #212529;
+      font-weight: 500;
+    }
+    
+    .no-dato {
+      color: #6c757d;
+      font-style: italic;
+    }
+    
+    /* Estilos para validación en tiempo real */
+    .error-mensaje {
+      color: #dc3545;
+      font-size: 0.85em;
+      margin-top: 4px;
+      display: none;
+      font-weight: 500;
+    }
+    
+    input.valido {
+      border-color: #28a745 !important;
+      box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    }
+    
+    input.invalido {
+      border-color: #dc3545 !important;
+      box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+    }
+    
+    /* Animaciones */
+    .datos-preview {
+      animation: slideIn 0.3s ease-out;
+    }
+    
+    .preview-item {
+      transition: all 0.2s ease;
+    }
+    
+    .preview-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .preview-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .datos-preview {
+        margin: 16px;
+        padding: 16px;
+      }
+    }
   </style>
 </head>
 <body>
