@@ -36,13 +36,10 @@ h1, h2 {
     border-radius: 8px;
     font-weight: bold;
     transition: 0.3s;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
 .nuevo-atleta a:hover {
     background-color: #e6c200;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
 }
 
 table {
@@ -55,7 +52,7 @@ table {
 th, td {
     text-align: left;
     padding: 10px;
-    border-bottom: 1px solid #eee;
+    border: 1px solid #e5e7eb;
 }
 
 th {
