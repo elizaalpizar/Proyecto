@@ -1,7 +1,7 @@
 /*hola*/
     :root {
-      --color-primario: #00bcd4;
-      --color-secundario: #80deea;
+      --color-primario: #667eea;
+      --color-secundario: #764ba2;
       --color-fondo: #f0f9fa;
       --color-texto: #1a1a1a;
       --fuente: 'Montserrat', sans-serif;
@@ -87,14 +87,15 @@
 
     .contenedor-mapa h2 {
       font-size: 2.2rem;
-      color: var(--color-primario);
+      color: #667eea;
       margin-bottom: 15px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .contenedor-mapa p {
       font-size: 1.1rem;
       margin-bottom: 30px;
-      color: #444;
+      color: #666;
     }
 
     .contenedor-mapa iframe {
@@ -102,12 +103,14 @@
       height: 450px;
       border: none;
       border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
     }
 
     /* FOOTER */
     footer {
-      background-color: var(--color-primario);
+      background: rgba(0, 0, 0, 0.8);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
       color: white;
       text-align: center;
       padding: 20px;
