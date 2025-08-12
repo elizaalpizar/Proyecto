@@ -31,7 +31,9 @@ if ($passwordRaw !== '' && strlen($passwordRaw) < 6) {
 if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
     $errors[] = "Correo electrónico inválido.";
 }
-if (!preg_match('/^[0-9]{8}$/', $telefono)) {
+// Permitir formatos 88888888 o 8888-8888
+$telNormalizado = preg_replace('/[^0-9]/', '', $telefono);
+if (!preg_match('/^[0-9]{8}$/', $telNormalizado)) {
     $errors[] = "Teléfono inválido.";
 }
 
@@ -75,7 +77,7 @@ $params = [
   $apellido1,
   $apellido2,
   $correo,
-  $telefono
+  $telNormalizado
 ];
 
 if ($passwordRaw !== '') {
@@ -86,10 +88,10 @@ $params[] = $id_old;
 
 $ok = odbc_execute($stmt, $params);
 if ($ok) {
-    echo "<p style='color:green;'>¡Datos actualizados correctamente!</p>";
-    echo "<p><a href='../Admin/CatalogoAtleta.php'>Volver al catálogo</a></p>";
+    echo "<script>alert('¡Datos actualizados correctamente!'); window.location.href='../Admin/CatalogoAtleta.php';</script>";
 } else {
-    echo "<p style='color:red;'>Error al actualizar: " . odbc_errormsg($conn) . "</p>";
+    $err = addslashes(odbc_errormsg($conn));
+    echo "<script>alert('Error al actualizar: $err'); window.location.href='../Admin/CatalogoAtleta.php';</script>";
 }
 
 odbc_close($conn);

@@ -32,11 +32,13 @@ if (!$row = odbc_fetch_array($stmt)) {
   <title>Editar Atleta</title>
   <link rel="stylesheet" href="../Css/Registro.css">
   <style>
-    .container { max-width: 900px; margin: 24px auto; background: #fff; padding: 24px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
-    h2 { margin-bottom: 16px; }
+    body { background: linear-gradient(180deg, #4f46e5 0%, #7c3aed 100%); min-height: 100vh; }
+    .container { max-width: 900px; margin: 24px auto; background: #ffffff; padding: 24px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); color:#111827; }
+    .container * { color:#111827; }
+    h2 { margin-bottom: 16px; color:#111827; }
     form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
     form label { font-weight: 700; color: #374151; }
-    form input { padding: 12px; border: 1px solid #e5e7eb; border-radius: 10px; }
+    form input { padding: 12px; border: 1px solid #e5e7eb; border-radius: 10px; background:#ffffff; color:#111827; }
     .full { grid-column: 1 / -1; }
     .actions { grid-column: 1 / -1; display: flex; gap: 12px; justify-content: flex-end; }
     .btn { padding: 10px 16px; border-radius: 10px; border: none; cursor: pointer; font-weight: 700; }
