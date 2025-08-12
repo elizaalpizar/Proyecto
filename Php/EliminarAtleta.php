@@ -23,19 +23,26 @@ if (!$conn) {
     die("Error de conexión: " . odbc_errormsg());
 }
 
-$sql = "DELETE FROM atletas WHERE identificacion = ?";
-$stmt = odbc_prepare($conn, $sql);
+// Eliminar en una transacción para respetar FKs (reservaciones -> atletas)
+@odbc_exec($conn, 'BEGIN TRANSACTION');
 
-if (!$stmt) {
-    die("Error preparando consulta: " . odbc_errormsg($conn));
-}
+// Primero eliminar reservaciones del atleta si existen
+$delRes = odbc_prepare($conn, "DELETE FROM reservaciones WHERE id_atleta = ?");
+$okRes = $delRes ? @odbc_execute($delRes, [$identificacion]) : false;
 
-$ok = odbc_execute($stmt, [$identificacion]);
-if ($ok) {
-    echo "<p style='color:green;'>¡Atleta eliminado correctamente!</p>";
-    echo "<p><a href='../Admin/CatalogoAtleta.php'>Volver al catálogo</a></p>";
+// Luego eliminar el atleta
+$delAtl = odbc_prepare($conn, "DELETE FROM atletas WHERE identificacion = ?");
+$okAtl = $delAtl ? @odbc_execute($delAtl, [$identificacion]) : false;
+
+if ($okRes && $okAtl) {
+    @odbc_exec($conn, 'COMMIT TRANSACTION');
+    echo "<script>alert('¡Atleta eliminado correctamente! (reservaciones asociadas también fueron eliminadas)'); window.location.href='../Admin/CatalogoAtleta.php';</script>";
+    exit;
 } else {
-    echo "<p style='color:red;'>Error al eliminar: " . odbc_errormsg($conn) . "</p>";
+    @odbc_exec($conn, 'ROLLBACK TRANSACTION');
+    $err = addslashes(odbc_errormsg($conn));
+    echo "<script>alert('No se pudo eliminar al atleta. Detalle: $err'); window.location.href='../Admin/CatalogoAtleta.php';</script>";
+    exit;
 }
 
 odbc_close($conn);
