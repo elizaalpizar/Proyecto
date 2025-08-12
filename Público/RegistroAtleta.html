@@ -11,7 +11,37 @@
     .mensaje.error { background: #fde8e8; color: #b91c1c; }
     .mensaje.success { background: #e6fffa; color: #065f46; }
     
-    /* Estilos para el preview de datos */
+    /* Estilos para mejorar la visibilidad del texto en los inputs */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"] {
+      color: #000 !important;
+      font-weight: 500;
+      font-size: 16px;
+    }
+    
+    /* Estilos para los placeholders */
+    input::placeholder {
+      color: #6c757d !important;
+      font-weight: 400;
+      opacity: 0.8;
+    }
+    
+    /* Estilos para cuando el input tiene foco */
+    input:focus {
+      color: #000 !important;
+      background-color: #fff !important;
+      border-color: #007bff !important;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+    
+    /* Estilos para inputs con texto */
+    input:not(:placeholder-shown) {
+      color: #000 !important;
+      font-weight: 600;
+    }
+    
     .datos-preview {
       background: #f8f9fa;
       border: 2px solid #e9ecef;
@@ -62,7 +92,6 @@
       font-style: italic;
     }
     
-    /* Estilos para validación en tiempo real */
     .error-mensaje {
       color: #dc3545;
       font-size: 0.85em;
@@ -81,7 +110,6 @@
       box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
     }
     
-    /* Animaciones */
     .datos-preview {
       animation: slideIn 0.3s ease-out;
     }
@@ -106,7 +134,6 @@
       }
     }
     
-    /* Responsive */
     @media (max-width: 768px) {
       .preview-grid {
         grid-template-columns: 1fr;
