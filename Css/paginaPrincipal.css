@@ -1,4 +1,3 @@
-/* Estilos generales */
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +12,6 @@ body {
   line-height: 1.6;
 }
 
-/* Navegación */
 .navbar {
   background: rgba(255, 255, 255, 0.95);
   -webkit-backdrop-filter: blur(10px);
@@ -58,14 +56,12 @@ body {
   background: rgba(102, 126, 234, 0.15);
 }
 
-/* Contenedor principal */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
 }
 
-/* Sección Hero */
 .hero-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -142,10 +138,8 @@ body {
   height: 400px;
   object-fit: cover;
   border-radius: 15px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
-/* Sección de características */
 .features-section {
   margin: 4rem 0;
   text-align: center;
@@ -206,7 +200,6 @@ body {
   line-height: 1.6;
 }
 
-/* Sección de servicios */
 .services-preview {
   margin: 4rem 0;
   text-align: center;
@@ -260,6 +253,34 @@ body {
   line-height: 1.6;
 }
 
+.testi-preview {
+  margin: 4rem 0;
+  text-align: center;
+}
+
+.testi-preview h3 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 3rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.testi-card {
+  background: rgba(255, 255, 255, 0.95);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
 .service-link {
   display: inline-block;
   color: #667eea;
@@ -273,7 +294,6 @@ body {
   color: #764ba2;
 }
 
-/* Footer */
 .footer {
   background: rgba(0, 0, 0, 0.8);
   -webkit-backdrop-filter: blur(10px);
@@ -326,7 +346,7 @@ body {
 }
 
 .social-links a:hover {
-  background: #764ba2;
+  background: #ffffff;
   transform: translateY(-3px);
 }
 
@@ -337,7 +357,6 @@ body {
   color: #ccc;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .navbar ul {
     flex-direction: column;
