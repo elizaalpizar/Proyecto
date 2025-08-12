@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #121212;
-    color: #f5f5f5;
+    background-color: #000;
+    color: #333;
     margin: 0;
     padding: 0;
 }
@@ -10,15 +10,16 @@ h1, h2 {
     text-align: center;
     color: #FFD700;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .container {
     max-width: 1100px;
     margin: 24px auto;
-    background: #1e1e1e;
+    background: #fff;
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
 .nuevo-atleta {
@@ -48,33 +49,28 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 16px;
-    background-color: #2a2a2a;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+    background: transparent;
 }
 
 th, td {
     text-align: left;
-    padding: 12px;
-    border: 1px solid #e5e7eb;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
 }
 
 th {
     background-color: #FFD700;
     color: #000;
     font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
 td {
-    color: #f5f5f5;
-    background-color: #1e1e1e;
+    color: #333;
+    background-color: #fff;
 }
 
 tr:hover {
-    background-color: #333;
+    background-color: #f8f9fa;
 }
 
 .actions {
@@ -84,9 +80,9 @@ tr:hover {
 }
 
 .btn {
-    padding: 8px 16px;
+    padding: 6px 10px;
+    border-radius: 8px;
     border: none;
-    border-radius: 6px;
     cursor: pointer;
     color: #fff;
     font-weight: bold;
@@ -117,16 +113,13 @@ tr:hover {
 header {
     background: #111827 !important;
     color: #fff !important;
-    padding: 16px 20px !important;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    padding: 12px 16px !important;
 }
 
 nav {
     display: flex !important;
-    gap: 20px !important;
+    gap: 16px !important;
     align-items: center !important;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 nav strong {
