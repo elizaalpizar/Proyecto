@@ -1,4 +1,10 @@
-  body {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
     font-family: 'Montserrat', sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
@@ -21,27 +27,22 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: auto;
   }
-
+  
   .navbar h1 {
     color: #667eea;
     font-size: 2rem;
     font-weight: 800;
     margin-bottom: 0.5rem;
   }
-
+  
   .navbar ul {
     list-style: none;
     display: flex;
     gap: 2rem;
     flex-wrap: wrap;
   }
-
+  
   .navbar a {
     text-decoration: none;
     color: #333;
@@ -49,18 +50,18 @@
     transition: color 0.3s ease;
     padding: 0.5rem 1rem;
     border-radius: 25px;
+    transition: all 0.3s ease;
   }
-
+  
   .navbar a:hover {
     color: #667eea;
     background: rgba(102, 126, 234, 0.1);
   }
-
+  
   .navbar a.active {
     color: #667eea;
     background: rgba(102, 126, 234, 0.15);
   }
-
   main {
     max-width: 450px;
     margin: 40px auto;
@@ -85,7 +86,7 @@
 
   input {
     width: 100%;
-    padding: 10px;
+    padding: 5px;
     margin-top: 5px;
     border: none;
     border-radius: 6px;

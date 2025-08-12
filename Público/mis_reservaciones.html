@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
     .list-card { background: rgba(255,255,255,0.95); border-radius: 16px; padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); max-width: 1100px; margin: 24px auto; }
-    .res-row { display: grid; grid-template-columns: 1fr 120px 100px 100px 140px 140px; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; }
+    .res-row { display: grid; grid-template-columns: 1fr 120px 120px 100px 100px 120px 140px; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; }
     .res-head { font-weight: 800; color: #4f46e5; }
     .badge { padding: 6px 10px; border-radius: 999px; font-weight: 700; font-size: 12px; display: inline-block; text-align: center; }
     .badge.pendiente { background: #eef2ff; color: #4338ca; }
@@ -20,6 +20,9 @@
     .mensaje { margin: 12px auto; max-width: 1100px; padding: 12px 16px; border-radius: 10px; font-weight: 600; }
     .mensaje.error { background: #fde8e8; color: #b91c1c; }
     .mensaje.success { background: #e6fffa; color: #065f46; }
+    .toolbar { max-width: 1100px; margin: 0 auto 12px; display: flex; justify-content: flex-end; }
+    .btn-export { background: #4f46e5; color: #fff; border: none; padding: 10px 14px; border-radius: 10px; cursor: pointer; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-export:hover { background: #4338ca; }
   </style>
 </head>
 <body>
@@ -43,10 +46,15 @@
 
     <div id="msg" class="mensaje" style="display:none;"></div>
 
+      <div class="toolbar">
+        <button id="btnExportPdf" class="btn-export"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
+      </div>
+
     <div class="list-card">
       <div class="res-row res-head">
         <div>Servicio</div>
         <div>Fecha</div>
+        <div>Días restantes</div>
         <div>Hora</div>
         <div>Duración</div>
         <div>Estado</div>
@@ -58,7 +66,12 @@
     <a class="btn-secondary" href="dashboard_atleta.html"><i class="fas fa-arrow-left"></i> Volver</a>
   </div>
 
+  <!-- jsPDF + autoTable -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
   <script>
+    let reservasData = [];
     const params = new URLSearchParams(window.location.search);
     const mensaje = params.get('mensaje');
     const tipo = params.get('tipo');
@@ -72,7 +85,7 @@
 
     fetch('../Php/listar_reservaciones.php')
       .then(r => r.json())
-      .then(data => render(data))
+      .then(data => { reservasData = Array.isArray(data) ? data : []; render(reservasData); })
       .catch(() => {
         const m = document.getElementById('msg');
         m.className = 'mensaje error';
@@ -93,6 +106,7 @@
         row.innerHTML = `
           <div>${r.servicio}</div>
           <div>${r.fecha}</div>
+          <div>${(r.diasRestantes === 0 || r.diasRestantes) ? r.diasRestantes : '—'}</div>
           <div>${(r.hora || '').toString().substring(0,5)}</div>
           <div>${(r.duracion || '').toString().replace(/\.0+$/, '')} h</div>
           <div><span class="badge ${r.estadoCalculado}">${r.estadoCalculado}</span></div>
@@ -103,6 +117,53 @@
         cont.appendChild(row);
       });
     }
+
+    document.getElementById('btnExportPdf').addEventListener('click', () => {
+      if (!reservasData || reservasData.length === 0) {
+        alert('No hay reservaciones para exportar.');
+        return;
+      }
+      const jspdfNS = window.jspdf;
+      if (!jspdfNS || !jspdfNS.jsPDF) {
+        alert('No se pudo cargar jsPDF. Verifique su conexión o intente nuevamente.');
+        return;
+      }
+      const doc = new jspdfNS.jsPDF();
+
+      const titulo = 'Mis Reservaciones - Energym';
+      const fechaGen = new Date().toLocaleString();
+      doc.setFontSize(16);
+      doc.text(titulo, 14, 16);
+      doc.setFontSize(10);
+      doc.text(`Generado: ${fechaGen}`, 14, 22);
+
+      const head = [['Servicio', 'Fecha', 'Días restantes', 'Hora', 'Duración (h)', 'Estado']];
+      const body = reservasData.map(r => [
+        r.servicio || '',
+        r.fecha || '',
+        (r.diasRestantes === 0 || r.diasRestantes) ? String(r.diasRestantes) : '—',
+        (r.hora || '').toString().substring(0,5),
+        (r.duracion || '').toString().replace(/\.0+$/, ''),
+        r.estadoCalculado || r.estado || ''
+      ]);
+
+      doc.autoTable({
+        startY: 28,
+        head,
+        body,
+        styles: { fontSize: 10 },
+        headStyles: { fillColor: [79, 70, 229] },
+        theme: 'grid',
+        didDrawPage: (data) => {
+          const pageSize = doc.internal.pageSize;
+          const pageWidth = pageSize.getWidth();
+          doc.setFontSize(9);
+          doc.text('Energym Costa Rica', pageWidth - 14, pageSize.getHeight() - 10, { align: 'right' });
+        }
+      });
+
+      doc.save('mis_reservaciones.pdf');
+    });
   </script>
 </body>
 </html>
