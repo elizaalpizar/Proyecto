@@ -38,6 +38,10 @@
       </div>
     </section>
 
+    <div class="filters">
+      <input id="buscador" type="text" placeholder="Buscar por nombre o código..." />
+    </div>
+
     <div id="msg" class="mensaje error"></div>
 
     <section class="services-section">
@@ -97,13 +101,16 @@
         m.style.display = 'block';
       });
 
-    document.getElementById('buscador').addEventListener('input', (e) => {
-      const q = e.target.value.toLowerCase();
-      const fil = servicios.filter(s =>
-        (s.nombre || '').toLowerCase().includes(q) || (s.codigo || '').toLowerCase().includes(q)
-      );
-      render(fil);
-    });
+    const buscador = document.getElementById('buscador');
+    if (buscador) {
+      buscador.addEventListener('input', (e) => {
+        const q = e.target.value.toLowerCase();
+        const fil = servicios.filter(s =>
+          (s.nombre || '').toLowerCase().includes(q) || (s.codigo || '').toLowerCase().includes(q)
+        );
+        render(fil);
+      });
+    }
 
     function quitarAcentos(txt){
       return (txt || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -120,13 +127,15 @@
         { k: ['pesas','mancuernas','fuerza'], img: 'Mancuernas.jpg' },
         { k: ['nutricion','nutricion deportiva','nutricion_deportiva'], img: 'Nutrición_Deportiva.jpg' },
         { k: ['sauna','recuperacion','recuperación'], img: 'Sauna_Recuperacion.jpg' },
-        { k: ['piscina','acuatico','acuatico'], img: 'Piscina.jpg' }
+        { k: ['piscina','acuatico','acuatico'], img: 'Piscina.jpg' },
+        { k: ['spinning','ciclismo','indoor'], img: 'SaladeSpinning.jpg' },
+        { k: ['yoga'], img: 'SaladeYoga.jpg' }
       ];
 
       for (const m of mapa){
         if (m.k.some(x => palabras.includes(x))) return m.img;
       }
-      return 'images.jpg';
+      return 'EnergymLogo.png';
     }
 
     function render(items) {
